@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101116">
+<title>Python · Lab móvil</title>
+<meta name="description" content="Material y consola Python de altura fija compacta, con selector inferior.">
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:#101116;color:#eceef4}*{box-sizing:border-box}html{width:100%;min-height:100%;}body{margin:0;width:100%;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 16px) env(safe-area-inset-right) 0 env(safe-area-inset-left)}main{position:relative;flex:0 0 var(--panel-height,600px);height:var(--panel-height,600px);width:100%;overflow:hidden}.pane{position:absolute;inset:0;visibility:hidden;pointer-events:none}.pane.active{visibility:visible;pointer-events:auto}iframe{display:block;width:100%;height:100%;border:0;background:#151515}.view-switch{display:flex;flex:none;gap:5px;padding:4px 8px;background:#101116;border-top:1px solid #2b2c38}.view-switch button{flex:1;min-height:44px;border:0;border-radius:8px;font:500 14px system-ui;color:#a8a9bb;background:transparent;touch-action:manipulation;cursor:pointer}.view-switch button[aria-pressed="true"]{background:#302c49;color:#ece7ff}.view-switch button:focus-visible{outline:2px solid #b9aaff;outline-offset:-2px}
+
+.height-control{display:flex;align-items:center;gap:12px;min-height:40px;padding:0 16px 4px;color:#8f8b9f;background:#101116;font-size:11px}.height-control label{letter-spacing:.6px}.height-control output{min-width:40px;text-align:right;font-variant-numeric:tabular-nums;color:#aaa5bc}.height-control input{flex:1;min-width:0;height:32px;margin:0;background:transparent;appearance:none;-webkit-appearance:none;cursor:ew-resize;touch-action:pan-y}.height-control input::-webkit-slider-runnable-track{height:3px;background:#393444;border-radius:8px}.height-control input::-moz-range-track{height:3px;background:#393444;border-radius:8px}.height-control input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;height:18px;width:18px;margin-top:-7.5px;background:#b7a8ed;border:2px solid #22202c;border-radius:50%;box-shadow:0 0 0 3px #b7a8ed12}.height-control input::-moz-range-thumb{height:14px;width:14px;background:#b7a8ed;border:2px solid #22202c;border-radius:50%}.height-control input:focus-visible{outline:1px solid #b7a8ed;outline-offset:2px;border-radius:5px}
+</style>
+</head>
+<body>
+<main>
+<section class="pane active" id="reading" aria-label="Material de Python">
+<iframe src="https://chicken-cheat-3zt.craft.me/12l8Fa4g49mKp6?theme=dark&amp;colorScheme=dark&amp;mode=dark" title="Intro a Python · Craft" allowfullscreen></iframe>
+</section>
+<section class="pane" id="console" aria-label="Consola Python" inert>
+<iframe src="https://jupyterlite.github.io/demo/repl/index.html#toolbar=1&amp;kernel=python&amp;theme=JupyterLab%20Dark" title="Consola Python · JupyterLite" allowfullscreen></iframe>
+</section>
+</main>
+<nav class="view-switch" aria-label="Cambiar entre material y consola">
+<button data-view="reading" aria-controls="reading" aria-pressed="true">Material</button>
+<button data-view="console" aria-controls="console" aria-pressed="false">Consola</button>
+</nav>
+<div class="height-control"><label for="panel-height">Altura</label><input id="panel-height" type="range" min="180" max="720" step="10" value="600" aria-label="Altura del material"><output for="panel-height" id="height-value">600 px</output></div>
+<script>
+const heights={reading:600,console:200};
+let currentView='reading';
+const heightSlider=document.querySelector('#panel-height');
+function applyHeight(){
+ const value=heights[currentView];
+ document.documentElement.style.setProperty('--panel-height',value+'px');
+ heightSlider.value=value;
+ heightSlider.setAttribute('aria-label','Altura '+(currentView==='reading'?'del material':'de la consola'));
+ heightSlider.setAttribute('aria-valuetext',value+' píxeles');
+ document.querySelector('#height-value').value=value+' px';
+}
+function setView(view){
+ currentView=view;
+ document.querySelectorAll('.pane').forEach(p=>{const active=p.id===view;p.classList.toggle('active',active);p.inert=!active});
+ document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
+ applyHeight();
+}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+heightSlider.addEventListener('input',()=>{heights[currentView]=Number(heightSlider.value);applyHeight()});
+applyHeight();
+// Keep both iframe instances mounted; manual dimensions never follow the keyboard.
+</script>
+</body>
+</html>
