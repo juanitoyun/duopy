@@ -13,15 +13,16 @@ function stdin(){
  const len=Atomics.load(state,1);return new TextDecoder().decode(new Uint8Array(channel,8,len))+'\n';
 }
 function reset(){if(ns)ns.destroy();ns=py.toPy({});ns.set('__name__','__main__')}
-async function init(){importScripts(CDN+'pyodide.js');py=await loadPyodide({indexURL:CDN});py.setStdout({write});py.setStderr({write});py.setStdin({stdin});reset();send('ready')}
+function reportMeta(){try{const data=JSON.parse(py.runPython("import sys, json, importlib.util\njson.dumps({'version':sys.version.split()[0], 'modules':[m for m in ('math','random','statistics','itertools','functools','collections','heapq','bisect','re','json','datetime','operator','sys','os') if importlib.util.find_spec(m) is not None]})"));data.cwd=py.FS.cwd();data.packages=Object.keys(py.loadedPackages||{}).sort();postMessage({type:'meta',meta:data})}catch{}}
+async function init(){importScripts(CDN+'pyodide.js');py=await loadPyodide({indexURL:CDN});py.setStdout({write});py.setStderr({write});py.setStdin({stdin});reset();reportMeta();send('ready')}
 onmessage=async e=>{const m=e.data;
  if(m.type==='init'){channel=m.channel;ready=init();try{await ready}catch(err){send('fatal',String(err))}return}
  if(m.type!=='script'&&m.type!=='repl')return;
  try{await ready;count=0;decoder=new TextDecoder();if(m.type==='script')reset();
  // Standard library is bundled; supported external packages can be loaded on demand.
  await py.loadPackagesFromImports(m.code);
- const result=await py.runPythonAsync(m.code,{globals:ns,filename:m.type==='script'?'programa.py':'<console>'});
+ const result=await py.runPythonAsync(m.code,{globals:ns,filename:m.type==='script'?(m.filename||'programa.py'):'<console>'});
  if(m.type==='repl'&&result!==undefined){if(result===null){}else if(typeof result==='object'&&typeof result.destroy==='function'){ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}else{ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}}
  if(result&&typeof result.destroy==='function')result.destroy();
- }catch(err){send('out',String(err)+'\n')}finally{const rest=decoder.decode();if(rest)send('out',rest);send('done')}
+ }catch(err){send('out',String(err)+'\n')}finally{const rest=decoder.decode();if(rest)send('out',rest);reportMeta();send('done')}
 };
