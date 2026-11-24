@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#202a3b">
+<title>DuoPy β</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;--bg:#182332;--body:#34475f;--edge:#101b2c;--key:#e2e9f2;--ink:#172438;--accent:#99caff;--run:#a2edb1;--lh:clamp(12px,3.8dvh,18px);--font:clamp(10px,3.05dvh,15px)}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg)}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+button{border:1px solid #8293aa;border-radius:6px;background:linear-gradient(#f1f5fa,#cdd9e8);color:var(--ink);font:650 clamp(11px,3.7dvh,19px)/1 system-ui,sans-serif;min-width:0;min-height:0;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;box-shadow:0 2px 0 #0e1829;display:grid;place-items:center;padding:0 2px}
+button:active,button.on{transform:translateY(1px);box-shadow:0 0 0 #0e1829;background:#9dc8f4}button:focus-visible{outline:2px solid #a2edb1;outline-offset:1px}button:disabled{opacity:.45;cursor:default}
+.deck{height:100%;height:100dvh;max-height:100%;width:100%;display:grid;grid-template-columns:clamp(34px,6vw,66px) minmax(0,1fr) clamp(72px,13vw,132px);grid-template-rows:auto auto minmax(0,1fr);gap:clamp(4px,1.2dvh,8px);padding:clamp(5px,1.6dvh,11px);background:linear-gradient(145deg,#526b87,#26364b);border:2px solid var(--edge);border-radius:12px}
+.screen{grid-column:1/3;display:grid;grid-template-columns:25px minmax(0,1fr);border:2px solid #142234;background:#101b29;border-radius:7px;min-width:0;overflow:hidden;height:calc(3 * var(--lh) + 6px);box-shadow:inset 0 1px 3px #0007}
+.screen.active{border-color:#9acbff}.deck[data-mode=run] .screen.active{border-color:var(--run)}
+.glyph{display:grid;place-items:center;background:#24364b;color:#9eb4cb;font:700 12px ui-monospace,monospace;border-right:1px solid #43566a;user-select:none}
+.viewport{overflow:auto;min-width:0;min-height:0;scrollbar-width:thin;scrollbar-color:#6386a7 #101b29;overscroll-behavior:contain;touch-action:pan-x pan-y;user-select:text;-webkit-user-select:text;font:var(--font)/var(--lh) ui-monospace,SFMono-Regular,Consolas,monospace;color:#e5edf8}
+pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white-space:pre}.line{height:var(--lh);display:block}.num{display:inline-block;width:3.2ch;color:#72869d;text-align:right;margin-right:1.2ch;user-select:none}.keyword{color:#d4afff}.string{color:#a5eab6}.number{color:#ffc58a}.comment{color:#7c96ab}.selected{background:#476b9c}.cursor{display:inline-block;width:0;height:.95em;vertical-align:-.12em;border-left:2px solid #9bd7ff;margin-right:-2px}.deck[data-mode=run] #output .cursor{border-color:var(--run)}
+.console{grid-row:1}.editor{grid-row:2}.side{grid-column:1;grid-row:3;display:flex;flex-direction:column;gap:5px;min-height:0}.side button{flex:1;background:linear-gradient(#536e8c,#30465e);color:#e5efff;border-color:#7692af;font-size:clamp(14px,4.7dvh,25px)}
+.keys{grid-column:2;grid-row:3;min-height:0;min-width:0;display:grid;grid-template-rows:repeat(6,minmax(0,1fr));gap:clamp(3px,1dvh,6px);background:#1a293b;padding:5px;border:1px solid #8298b1;border-radius:9px}
+.keyrow{display:flex;gap:clamp(2px,.6vw,5px);min-height:0;min-width:0}.keyrow button{flex:var(--w,1) 1 0}.keyrow .aux{background:linear-gradient(#c5dfff,#9abce5)}.keyrow .fn{background:linear-gradient(#ded7fa,#b8b2e4)}.keyrow .enter{background:linear-gradient(#c4f6d0,#91d7a5)}.keyrow .space{flex:5 1 0}
+.controls{grid-column:3;grid-row:1/4;display:flex;flex-direction:column;min-height:0;gap:6px;padding:2px 0}
+.switch{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;flex:0 0 clamp(56px,20dvh,90px);background:#23364b;border:1px solid #7d94af;color:#e3edfa;border-radius:10px;font-size:clamp(10px,3dvh,15px);box-shadow:inset 0 1px 3px #0b1525}
+.track{position:relative;width:75%;height:clamp(20px,7dvh,34px);border-radius:20px;background:#172739;border:2px solid #0c1622;box-shadow:inset 0 1px 5px #0009}.knob{position:absolute;top:2px;left:3px;height:calc(100% - 4px);aspect-ratio:1;border-radius:50%;background:#9acbff;box-shadow:0 1px 4px #0009;transition:left .12s,transform .12s}.deck[data-mode=run] .knob{left:calc(100% - 3px);transform:translateX(-100%);background:#9df2b1}.deck[data-mode=run] .track{background:#285f43}.modewords{display:flex;width:100%;justify-content:space-evenly;color:#8298ae}.deck[data-mode=edit] .modewords b:first-child,.deck[data-mode=run] .modewords b:last-child{color:#e6f4ff}
+.clicks{display:flex;gap:4px;flex:0 0 clamp(24px,9dvh,42px)}.clicks button{flex:1;background:linear-gradient(#b3c7df,#849cb9);font-size:clamp(10px,3dvh,15px)}
+.joywrap{flex:1;min-height:0;display:grid;place-items:center}.joy{width:100%;max-width:120px;max-height:100%;aspect-ratio:1;display:grid;grid-template:repeat(3,minmax(0,1fr))/repeat(3,minmax(0,1fr));gap:2px;background:#162334;border:2px solid #8ca2b9;border-radius:50%;padding:6%;overflow:hidden}.joy button{border-radius:7px;background:#3c526d;color:#dbe8f8;border:0;box-shadow:none;font-size:clamp(11px,4dvh,22px)}.joy .center{border-radius:50%;background:radial-gradient(circle at 35% 25%,#7c93ac,#30445c 65%,#1d2b3c);border:1px solid #9cb0c7}.joy .up{grid-area:1/2}.joy .left{grid-area:2/1}.joy .center{grid-area:2/2}.joy .right{grid-area:2/3}.joy .down{grid-area:3/2}
+@media(orientation:portrait){.deck{grid-template-columns:32px minmax(0,1fr) 58px;grid-template-rows:auto auto minmax(0,1fr);--lh:18px;--font:12px}.keys{gap:4px;padding:3px}.keyrow{gap:2px}.keyrow button{font-size:11px}.joywrap{align-items:start}.switch{flex-basis:75px}}
+</style>
+</head>
+<body>
+<main class="deck" id="deck" data-mode="edit">
+<section class="screen console" id="consoleScreen" aria-label="Consola"><div class="glyph">&gt;_</div><div class="viewport" id="consoleView" tabindex="0"><pre id="output"></pre></div></section>
+<section class="screen editor active" id="editorScreen" aria-label="Editor"><div class="glyph">.py</div><div class="viewport" id="editorView" tabindex="0"><pre id="code"></pre></div></section>
+<aside class="side" aria-label="Archivos">
+<button id="open" title="Abrir .py" aria-label="Abrir archivo">↥</button>
+<button id="save" title="Guardar .py" aria-label="Guardar archivo">↓</button>
+<button id="new" title="Nuevo script" aria-label="Nuevo script">＋</button>
+<button id="undo" title="Deshacer" aria-label="Deshacer">↶</button>
+<input type="file" id="file" accept=".py,.txt,text/plain" hidden>
+</aside>
+<section class="keys" id="keyboard" aria-label="Teclado"></section>
+<aside class="controls" aria-label="Controles">
+<button class="switch" id="switch" role="switch" aria-checked="false" aria-label="EDIT / RUN"><span class="track"><span class="knob"></span></span><span class="modewords"><b>EDIT</b><b>RUN</b></span></button>
+<div class="clicks"><button id="select" title="Seleccionar / interrumpir" aria-label="Seleccionar">SEL</button><button id="copy" title="Copiar / pegar" aria-label="Copiar o pegar">CPY</button></div>
+<div class="joywrap"><div class="joy" aria-label="Joystick">
+<button class="up" data-move="up" aria-label="Arriba">▲</button><button class="left" data-move="left" aria-label="Izquierda">◀</button><button class="center" id="center" aria-label="Confirmar"></button><button class="right" data-move="right" aria-label="Derecha">▶</button><button class="down" data-move="down" aria-label="Abajo">▼</button>
+</div></div>
+</aside>
+</main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const deck=$('deck'), code=$('code'), out=$('output'), ev=$('editorView'), cv=$('consoleView');
+let script='n = 5\nfor i in range(n):\n    print(i)', pos=0, anchor=null, undo=[], clip='', mode='edit', layer='abc', shift=false;
+let filename='programa.py', transcript='', command='', cp=0, history=[], hi=0, worker=null, busy=false, waiting=false, loaded=false, channel=null, generation=0, pending=null;
+try{const saved=JSON.parse(localStorage.getItem('duopy.beta.v1'));if(saved&&typeof saved.text==='string'){script=saved.text;filename=saved.name||filename;pos=Math.min(saved.pos||0,script.length)}}catch{}
+function persist(){try{localStorage.setItem('duopy.beta.v1',JSON.stringify({text:script,name:filename,pos}))}catch{}}
+function span(text,cls){const el=document.createElement('span');el.textContent=text;if(cls)el.className=cls;return el}
+const tokens=/(#[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b(?:def|class|return|if|elif|else|for|while|in|not|and|or|is|import|from|as|pass|break|continue|try|except|finally|raise|with|lambda|assert|True|False|None|yield|del|global|nonlocal)\b|\b\d+(?:\.\d+)?\b)/g;
+function tokenClass(s){return s[0]==='#'?'comment':s[0]==='"'||s[0]==="'"?'string':/^\d/.test(s)?'number':'keyword'}
+function renderEditor(follow=true){
+ const frag=document.createDocumentFragment();let offset=0, caret=null;
+ const lo=anchor===null?pos:Math.min(anchor,pos),hi=anchor===null?pos:Math.max(anchor,pos);
+ script.split('\n').forEach((line,i)=>{
+  const row=document.createElement('span');row.className='line';row.append(span(String(i+1),'num'));
+  const ranges=[...line.matchAll(tokens)].map(m=>[m.index,m.index+m[0].length,tokenClass(m[0])]);
+  const cuts=new Set([0,line.length]);ranges.forEach(r=>{cuts.add(r[0]);cuts.add(r[1])});
+  for(const v of [pos,lo,hi])if(v>=offset&&v<=offset+line.length)cuts.add(v-offset);
+  const points=[...cuts].sort((a,b)=>a-b);
+  for(let j=0;j<points.length;j++){const a=points[j],b=points[j+1];if(mode==='edit'&&offset+a===pos){caret=span('','cursor');row.append(caret)}if(b===undefined)break;const r=ranges.find(t=>a>=t[0]&&a<t[1]);row.append(span(line.slice(a,b),(r?r[2]:'')+(offset+a>=lo&&offset+a<hi?' selected':'')))}
+  frag.append(row);offset+=line.length+1;
+ });code.replaceChildren(frag);if(follow&&caret)caret.scrollIntoView({block:'nearest',inline:'nearest'});persist()
+}
+function renderConsole(follow=true){
+ out.replaceChildren(document.createTextNode(transcript));
+ if(mode==='run'&&(!busy||waiting)){const prompt=waiting?'':'>>> ';out.append(document.createTextNode(prompt+command.slice(0,cp)),span('','cursor'),document.createTextNode(command.slice(cp)))}
+ else if(!transcript)out.append(document.createTextNode('>>> '));
+ if(follow)cv.scrollTop=cv.scrollHeight;
+}
+function append(s){transcript=(transcript+s).slice(-100000);renderConsole()}
+function snapshot(){undo.push([script,pos]);if(undo.length>150)undo.shift()}
+function replace(text){if(mode!=='edit')return;snapshot();const a=anchor===null?pos:Math.min(anchor,pos),b=anchor===null?pos:Math.max(anchor,pos);script=script.slice(0,a)+text+script.slice(b);pos=a+text.length;anchor=null;renderEditor();syncClicks()}
+function backspace(){if(mode==='edit'){if(anchor!==null&&anchor!==pos){replace('');return}if(pos){anchor=pos-1;replace('')}}else if((!busy||waiting)&&cp){command=command.slice(0,cp-1)+command.slice(cp);cp--;renderConsole()}}
+function insert(s){if(mode==='edit')replace(s);else if(!busy||waiting){command=command.slice(0,cp)+s+command.slice(cp);cp+=s.length;renderConsole()}}
+function enter(){if(mode==='edit'){const line=script.slice(script.lastIndexOf('\n',pos-1)+1,pos);replace('\n'+(line.match(/^\s*/)||[''])[0]+(line.trimEnd().endsWith(':')?'    ':''));return}
+ if(busy&&!waiting)return;const text=command;command='';cp=0;
+ if(waiting){const bytes=new TextEncoder().encode(text);if(bytes.length>channel.byteLength-8){command=text;cp=text.length;renderConsole();return}const state=new Int32Array(channel,0,2);new Uint8Array(channel,8).set(bytes);Atomics.store(state,1,bytes.length);waiting=false;append(text+'\n');Atomics.store(state,0,1);Atomics.notify(state,0);syncClicks();return}
+ if(!text.trim()){append('>>> \n');return}history.push(text);hi=history.length;append('>>> '+text+'\n');execute('repl',text)
+}
+function move(dir){if(mode==='run'){if(waiting||!busy){if(dir==='left')cp=Math.max(0,cp-1);if(dir==='right')cp=Math.min(command.length,cp+1);if(!waiting&&(dir==='up'||dir==='down')&&history.length){hi=Math.max(0,Math.min(history.length,hi+(dir==='up'?-1:1)));command=history[hi]||'';cp=command.length} else if(dir==='up'||dir==='down'){cv.scrollTop+=(dir==='up'?-1:1)*parseFloat(getComputedStyle(cv).lineHeight);return}renderConsole(false)}else cv.scrollTop+=(dir==='up'?-1:dir==='down'?1:0)*parseFloat(getComputedStyle(cv).lineHeight);return}
+ const start=script.lastIndexOf('\n',pos-1)+1,end=script.indexOf('\n',pos),col=pos-start;
+ if(dir==='left')pos=Math.max(0,pos-1);if(dir==='right')pos=Math.min(script.length,pos+1);
+ if(dir==='up'&&start>0){const prev=script.lastIndexOf('\n',start-2)+1;pos=prev+Math.min(col,start-1-prev)}
+ if(dir==='down'&&end!==-1){const next=script.indexOf('\n',end+1);pos=end+1+Math.min(col,(next===-1?script.length:next)-end-1)}renderEditor();syncClicks()
+}
+function syncClicks(){$('select').textContent=mode==='run'?'STOP':'SEL';$('select').setAttribute('aria-label',mode==='run'?'Interrumpir':'Seleccionar');$('select').classList.toggle('on',anchor!==null);$('copy').textContent=mode==='run'?'CLR':anchor!==null&&anchor!==pos?'CPY':'PST';$('copy').setAttribute('aria-label',mode==='run'?'Limpiar consola':anchor!==null&&anchor!==pos?'Copiar':'Pegar');$('undo').disabled=mode!=='edit';$('open').disabled=mode!=='edit';$('new').disabled=mode!=='edit'}
+function selection(){if(mode==='run'){stop(true);return}anchor=anchor===null?pos:null;renderEditor();syncClicks()}
+function copyPaste(){if(mode==='run'){transcript='';renderConsole();return}if(anchor!==null&&anchor!==pos){clip=script.slice(Math.min(anchor,pos),Math.max(anchor,pos));anchor=null;renderEditor();syncClicks();try{navigator.clipboard?.writeText(clip).catch(()=>{})}catch{}}
+ else if(clip)replace(clip);else if(navigator.clipboard?.readText)navigator.clipboard.readText().then(s=>{if(s&&mode==='edit')replace(s)}).catch(()=>{})}
+const key=(label,value=label,w=1,cls='')=>({label,value,w,cls});
+function keyboard(){
+ const letters=layer==='abc'?[...'qwertyuiop']:['+','-','*','/','//','%','**','=','==','!='];
+ const mid=layer==='abc'?[...'asdfghjkl']:['<','>','<=','>=','&','|','^','~','@'];
+ const low=layer==='abc'?[...'zxcvbnm']:['\\','!','?','#','$',';',':'];
+ const chars=a=>a.map(c=>key(shift&&layer==='abc'?c.toUpperCase():c));
+ const rows=[
+  [...'1234567890'].map(x=>key(x)).concat(key('⌫','back',1.4,'fn')),
+  ['(',')','[',']','{','}',':',',','.','_',"'",'"'].map(x=>key(x)),
+  chars(letters).concat(key('TAB','tab',1.3,'aux')),
+  chars(mid).concat(key('↵','enter',1.7,'enter')),
+  [key('⇧','shift',1.2,'aux'),...chars(low),key(layer==='abc'?'SYM':'ABC','layer',1.5,'fn')],
+  [key('def','def ',1,'fn'),key('if','if ',1,'fn'),key('for','for ',1,'fn'),key('',' ',4.3,'space'),key('=','=',1),key('←','left',1,'aux'),key('→','right',1,'aux')]
+ ];
+ const fragment=document.createDocumentFragment();for(const row of rows){const r=document.createElement('div');r.className='keyrow';for(const k of row){const b=document.createElement('button');b.type='button';b.textContent=k.label;b.className=k.cls;b.style.setProperty('--w',k.w);b.dataset.key=k.value;b.setAttribute('aria-label',k.value===' '?'Espacio':k.label);if(k.value==='shift')b.classList.toggle('on',shift);r.append(b)}fragment.append(r)}$('keyboard').replaceChildren(fragment)
+}
+function action(k){if(k==='back')backspace();else if(k==='enter')enter();else if(k==='tab')insert('    ');else if(k==='shift'){shift=!shift;keyboard()}else if(k==='layer'){layer=layer==='abc'?'sym':'abc';shift=false;keyboard()}else if(k==='left'||k==='right')move(k);else{insert(k);if(shift&&layer==='abc'&&/^[A-Z]$/.test(k)){shift=false;keyboard()}}}
+$('keyboard').addEventListener('click',e=>{const b=e.target.closest('button[data-key]');if(b)action(b.dataset.key)});
+let repeatDelay,repeatTimer;
+function clearRepeat(){clearTimeout(repeatDelay);clearInterval(repeatTimer)}
+function repeatable(root,selector,fn){root.addEventListener('pointerdown',e=>{const b=e.target.closest(selector);if(!b)return;clearRepeat();repeatDelay=setTimeout(()=>{fn(b);repeatTimer=setInterval(()=>fn(b),85)},360)});}
+repeatable($('keyboard'),'button[data-key="back"]',()=>backspace());repeatable(document.querySelector('.joy'),'button[data-move]',b=>move(b.dataset.move));['pointerup','pointercancel','blur'].forEach(n=>window.addEventListener(n,clearRepeat));
+document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>move(b.dataset.move));$('center').onclick=enter;$('select').onclick=selection;$('copy').onclick=copyPaste;
+$('undo').onclick=()=>{if(mode==='edit'&&undo.length){[script,pos]=undo.pop();anchor=null;renderEditor();syncClicks()}};
+$('new').onclick=()=>{if(mode==='edit'&&(!script||confirm('¿Nuevo script?'))){snapshot();script='';pos=0;anchor=null;filename='programa.py';renderEditor();syncClicks()}};
+$('open').onclick=()=>$('file').click();$('file').onchange=async()=>{const f=$('file').files[0];if(f&&mode==='edit'){try{const s=await f.text();if(mode!=='edit')return;snapshot();script=s;filename=f.name;pos=0;anchor=null;renderEditor();syncClicks()}catch(e){append(String(e)+'\n')}}$('file').value=''};
+$('save').onclick=()=>{const a=document.createElement('a'),url=URL.createObjectURL(new Blob([script],{type:'text/x-python'}));a.href=url;a.download=filename.endsWith('.py')?filename:filename+'.py';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+function startWorker(){if(worker)return;const id=++generation;loaded=false;channel=typeof SharedArrayBuffer==='function'&&crossOriginIsolated?new SharedArrayBuffer(65544):null;
+ worker=new Worker('./python-worker.js');worker.onmessage=e=>{if(id!==generation)return;const m=e.data;
+  if(m.type==='ready'){loaded=true;if(pending){const p=pending;pending=null;worker.postMessage(p)}}
+  else if(m.type==='out')append(m.text);
+  else if(m.type==='input'){waiting=true;command='';cp=0;renderConsole();syncClicks()}
+  else if(m.type==='done'){busy=false;waiting=false;renderConsole();syncClicks()}
+  else if(m.type==='fatal'){append(m.text+'\n');stop(false)}
+ };worker.onerror=e=>{if(id===generation){append('Error: '+e.message+'\n');stop(false)}};worker.postMessage({type:'init',channel})
+}
+function execute(kind,text){if(busy)return;busy=true;waiting=false;command='';cp=0;renderConsole();try{startWorker();const p={type:kind,code:text};if(loaded)worker.postMessage(p);else{pending=p;append('… Python\n')}}catch(e){append(String(e)+'\n');stop(false)}}
+function stop(note){if(worker){worker.terminate();worker=null;generation++}if(note&&busy)append('\nKeyboardInterrupt\n');busy=false;waiting=false;loaded=false;pending=null;channel=null;command='';cp=0;renderConsole();syncClicks()}
+function toggle(){if(mode==='edit'){mode='run';anchor=null;transcript='';deck.dataset.mode=mode;execute('script',script)}else{if(busy)stop(true);mode='edit';deck.dataset.mode=mode} $('switch').setAttribute('aria-checked',String(mode==='run'));$('consoleScreen').classList.toggle('active',mode==='run');$('editorScreen').classList.toggle('active',mode==='edit');renderEditor();renderConsole();syncClicks()}
+$('switch').onclick=toggle;
+document.addEventListener('keydown',e=>{if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='F5'){e.preventDefault();toggle();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
+ if(e.key.startsWith('Arrow')){e.preventDefault();move(e.key.slice(5).toLowerCase())}else if(e.key==='Enter'){e.preventDefault();enter()}else if(e.key==='Backspace'){e.preventDefault();backspace()}else if(e.key==='Tab'&&e.target.tagName!=='BUTTON'){e.preventDefault();insert('    ')}else if(e.key.length===1&&!e.altKey){e.preventDefault();insert(e.key)}});
+document.addEventListener('paste',e=>{if(e.target.tagName==='INPUT')return;const s=e.clipboardData?.getData('text/plain');if(s!==undefined){e.preventDefault();insert(s)}});
+keyboard();renderEditor();renderConsole();syncClicks();
+// GitHub Pages has no custom headers. Restrict isolation to this beta directory.
+if(!crossOriginIsolated&&'serviceWorker'in navigator&&window.isSecureContext&&window.top===window.self){
+ navigator.serviceWorker.register('./isolation.js',{scope:'./'}).then(()=>navigator.serviceWorker.ready).then(()=>{
+  const reload=()=>{try{if(sessionStorage.getItem('duopy-coi-reload'))return;sessionStorage.setItem('duopy-coi-reload','1')}catch{return}if(!busy)location.reload()};
+  if(navigator.serviceWorker.controller)reload();else navigator.serviceWorker.addEventListener('controllerchange',reload,{once:true});
+ }).catch(()=>{});
+}
+</script>
+</body>
+</html>
