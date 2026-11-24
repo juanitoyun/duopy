@@ -1,0 +1,14 @@
+[
+  {
+    "file": "recursion.ipynb",
+    "title": "Recursión"
+  },
+  {
+    "file": "search.ipynb",
+    "title": "Búsqueda binaria"
+  },
+  {
+    "file": "state.ipynb",
+    "title": "Memoria del kernel"
+  }
+]

@@ -99,9 +99,74 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 #libraryList button small{font-size:10px;color:#48617b}
 #libraryList button.restore{background:#b9e8cc}
 #libraryList .lib-status{padding:6px;color:#b9cde0}
+
+/* beta 0.5 — two vertically stacked surfaces, no remounts */
+.duo-stage{position:relative;width:100%;height:100%;overflow:hidden;isolation:isolate}
+.duo-stage>.deck,.notebook-deck{position:absolute;inset:0;width:100%;height:100%;max-height:100%;transition:transform 440ms cubic-bezier(.22,.8,.24,1);will-change:transform}
+.duo-stage>.deck{transform:translateY(0)}
+.notebook-deck{transform:translateY(-100%);display:grid;grid-template-columns:clamp(48px,9vw,100px) minmax(0,1fr) clamp(70px,12vw,128px);gap:clamp(4px,1.2dvh,8px);padding:clamp(5px,1.6dvh,11px);background:linear-gradient(145deg,#526b87,#26364b);border:2px solid var(--edge);border-radius:12px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.duo-stage[data-page=notebook]>.deck{transform:translateY(100%)}
+.duo-stage[data-page=notebook]>.notebook-deck{transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.duo-stage>.deck,.notebook-deck{transition:none}}
+.page-switch{flex:0 0 clamp(25px,9dvh,37px);background:linear-gradient(#536e8c,#30465e);color:#e4efff;border-color:#7692af;font-size:clamp(16px,5dvh,25px)}
+.nb-side,.nb-right{display:flex;flex-direction:column;gap:5px;min-height:0}
+.nb-side button,.nb-right button{flex:1;min-height:0;background:linear-gradient(#536e8c,#30465e);color:#e5efff;border-color:#7692af;font-size:clamp(12px,4dvh,19px)}
+.nb-side button{flex:0 0 clamp(27px,10dvh,45px)}
+.nb-right #nbRun{background:linear-gradient(#c4f6d0,#91d7a5);color:#193d2b}
+.nb-right #nbAll{background:linear-gradient(#c5dfff,#9abce5);color:#172438}
+.nb-right #nbStop{color:#ffc5c5}
+.nb-center{min-width:0;min-height:0;display:flex;flex-direction:column;background:#101b29;border:2px solid #142234;border-radius:8px;overflow:hidden}
+.nb-header{flex:none;display:flex;align-items:center;gap:8px;min-height:26px;padding:4px 9px;background:#25384d;color:#cbd9ed;font:600 clamp(10px,3dvh,14px)/1.2 system-ui,sans-serif}
+.nb-brand{color:#ffaf65;font-size:1.4em}.nb-header #nbName{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1}
+#nbState{color:#8cacc8;white-space:nowrap;font-size:10px}
+.nb-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;scrollbar-width:thin;scrollbar-color:#6386a7 #101b29;padding:6px;user-select:text;-webkit-user-select:text;-webkit-touch-callout:default}
+.nb-cell{position:relative;display:grid;grid-template-columns:clamp(30px,6vw,45px) minmax(0,1fr);gap:5px;border:1px solid #35495e;background:#152538;border-radius:6px;margin-bottom:6px;padding:5px;min-width:0}
+.nb-cell.selected-cell{border-color:#9acbff;background:#1a2c41}
+.nb-cell .nb-gutter{display:flex;flex-direction:column;align-items:center;gap:5px;color:#9bb3cb;font:11px ui-monospace,monospace;user-select:none}
+.nb-gutter button{width:100%;height:23px;font-size:12px;background:#3a526a;color:#d6f8de;box-shadow:none;border:1px solid #5a7894}
+.nb-content{min-width:0}
+.nb-content pre{font:var(--font)/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;min-width:0;white-space:pre;overflow:auto;padding:2px 3px;color:#e5edf8}
+.nb-content .nb-output{border-top:1px solid #3b526a;margin-top:4px;padding-top:5px;color:#a9e6bd;white-space:pre-wrap;overflow-wrap:anywhere}
+.nb-content .nb-output.error{color:#ffb6b6}
+.nb-content img{display:block;max-width:100%;max-height:55dvh;object-fit:contain}
+.nb-markdown{font:clamp(11px,3.3dvh,15px)/1.45 system-ui,sans-serif;color:#dce8f6;overflow-wrap:anywhere}
+.nb-markdown p{margin:3px 0}.nb-markdown h1,.nb-markdown h2,.nb-markdown h3{font-size:1.25em;margin:2px 0 5px;color:#e0caff}.nb-markdown code{color:#a8e7be}.nb-markdown pre{background:#101b29;border-radius:4px}
+#nbInput{display:flex;flex:none;gap:4px;padding:5px;background:#25384d}
+#nbInput[hidden]{display:none}#nbInput input{flex:1;min-width:0;background:#101b29;color:#e5edf8;border:1px solid #7f96b0;border-radius:4px;padding:4px;font:14px ui-monospace,monospace}#nbInput button{width:38px}
+.nb-picker,.nb-toast{position:absolute;z-index:5;left:8px;bottom:8px;width:min(330px,75%);max-height:calc(100% - 16px);padding:8px;border:1px solid #829ebc;border-radius:9px;background:#132235ef;color:#e6f1fc;backdrop-filter:blur(7px);box-shadow:0 5px 16px #07132170;font:12px/1.4 ui-monospace,monospace}
+.nb-picker{display:flex;flex-direction:column;overflow:hidden}.nb-picker[hidden],.nb-toast[hidden]{display:none}
+#nbChoices{display:flex;flex-direction:column;overflow:auto;gap:5px}#nbChoices button{min-height:30px;flex:none;font-size:12px}
+.nb-toast{width:max-content;max-width:75%;pointer-events:none}
+@media(orientation:portrait){.notebook-deck{grid-template-columns:42px minmax(0,1fr) 52px}}
 </style>
 </head>
 <body>
+<div id="duoStage" class="duo-stage" data-page="console">
+<section class="notebook-deck" id="notebookDeck" aria-label="Notebooks" inert aria-hidden="true">
+<aside class="nb-side">
+<button id="nbOpen" title="Abrir notebook" aria-label="Abrir notebook">↥</button>
+<button id="nbLibrary" title="Biblioteca" aria-label="Biblioteca">▤</button>
+<div class="touchpad" id="nbPad" aria-label="Scroll del notebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg></div>
+</aside>
+<div class="nb-center">
+<header class="nb-header"><span class="nb-brand" aria-hidden="true">◉</span><span id="nbName">Notebook</span><span id="nbState" role="status">●</span></header>
+<div class="nb-scroll" id="nbScroll" tabindex="0" aria-label="Celdas"></div>
+<form id="nbInput" hidden><input id="nbInputText" aria-label="Entrada Python" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="submit" aria-label="Enviar entrada">↵</button></form>
+</div>
+<aside class="nb-right">
+<button id="toConsole" title="Volver a la consola" aria-label="Bajar a consola">⌄</button>
+<button id="nbRun" title="Ejecutar celda" aria-label="Ejecutar celda">▶</button>
+<button id="nbAll" title="Ejecutar todas" aria-label="Ejecutar todas">▶▶</button>
+<button id="nbStop" title="Detener y reiniciar kernel" aria-label="Detener">■</button>
+<button id="nbReset" title="Reiniciar kernel" aria-label="Reiniciar kernel">↻</button>
+<button id="nbCopy" title="Copiar celda" aria-label="Copiar celda">⧉</button>
+<button id="nbPrev" title="Celda anterior" aria-label="Celda anterior">▴</button>
+<button id="nbNext" title="Celda siguiente" aria-label="Celda siguiente">▾</button>
+</aside>
+<input id="nbFile" type="file" accept=".ipynb,application/json" hidden>
+<div class="nb-picker" id="nbPicker" hidden><div class="speed-head"><span>NB</span><button id="nbPickerClose" aria-label="Cerrar">×</button></div><div id="nbChoices"></div></div>
+<div class="nb-toast" id="nbToast" role="status" hidden></div>
+</section>
 <main class="deck" id="deck" data-mode="edit">
 <section class="screen console" id="consoleScreen" aria-label="Consola"><div class="glyph">&gt;_</div><div class="viewport" id="consoleView" tabindex="0"><pre id="output"></pre></div><button class="info-dot" id="consoleInfo" aria-label="Información de la consola" title="Información de la consola">i</button></section>
 <section class="screen editor active" id="editorScreen" aria-label="Editor"><div class="glyph">.py</div><div class="viewport" id="editorView" tabindex="0"><pre id="code"></pre></div><button class="info-dot" id="editorInfo" aria-label="Información del script" title="Información del script">i</button></section>
@@ -124,6 +189,7 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <section class="keys" id="keyboard" aria-label="Teclado"></section>
 <aside class="controls" aria-label="Controles">
 <button class="switch" id="switch" role="switch" aria-checked="false" aria-label="EDIT / RUN"><span class="track"><span class="knob"></span></span><span class="modewords"><b>EDIT</b><b>RUN</b></span></button>
+<button id="toNotebook" class="page-switch" title="Subir a notebooks" aria-label="Subir a notebooks">⌃</button>
 <div class="direction-wrap"><div class="dpad" id="dpad" aria-label="Cruceta">
 <button class="north" data-move="up" aria-label="Arriba">▴</button><button class="west" data-move="left" aria-label="Izquierda">◂</button><span class="hub"></span><button class="east" data-move="right" aria-label="Derecha">▸</button><button class="south" data-move="down" aria-label="Abajo">▾</button>
 </div></div>
@@ -134,6 +200,7 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <div class="speed-panel pop-panel" id="viewPanel" role="group" aria-label="Visualización" hidden><div class="speed-head"><span>VIEW</span><button id="viewClose" aria-label="Cerrar">×</button></div><div id="viewLevels"></div></div>
 <div class="speed-panel pop-panel" id="libraryPanel" role="group" aria-label="Biblioteca" hidden><div class="speed-head"><span>LIB</span><button id="libraryClose" aria-label="Cerrar">×</button></div><div id="libraryList"></div></div>
 </main>
+</div>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -227,9 +294,9 @@ function execute(kind,text){if(busy)return;busy=true;waiting=false;command='';cp
 function stop(note){if(worker){worker.terminate();worker=null;generation++}if(note&&busy)append('\nKeyboardInterrupt\n');busy=false;waiting=false;loaded=false;runtimeMeta=null;pending=null;channel=null;command='';cp=0;renderConsole();syncClicks()}
 function toggle(){if(mode==='edit'){mode='run';anchor=null;transcript='';deck.dataset.mode=mode;execute('script',script)}else{if(busy)stop(true);mode='edit';deck.dataset.mode=mode} $('switch').setAttribute('aria-checked',String(mode==='run'));$('consoleScreen').classList.toggle('active',mode==='run');$('editorScreen').classList.toggle('active',mode==='edit');renderEditor();renderConsole();syncClicks()}
 $('switch').onclick=()=>{closeMenu();closePanels();cancelPad();hideToast();toggle();if(deck.dataset.view==='focus')requestAnimationFrame(()=>{if(mode==='edit')renderEditor();else renderConsole()})};
-document.addEventListener('keydown',e=>{if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='Escape'){if(menuOpen||!viewPanel.hidden||!libraryPanel.hidden||!speedPanel.hidden){e.preventDefault();closeMenu();closePanels();return}}if(e.key==='F5'){e.preventDefault();$('switch').click();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
+document.addEventListener('keydown',e=>{if(document.getElementById('duoStage').dataset.page==='notebook')return;if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='Escape'){if(menuOpen||!viewPanel.hidden||!libraryPanel.hidden||!speedPanel.hidden){e.preventDefault();closeMenu();closePanels();return}}if(e.key==='F5'){e.preventDefault();$('switch').click();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
  if(e.key.startsWith('Arrow')){e.preventDefault();if(!e.repeat)move(e.key.slice(5).toLowerCase())}else if(e.key==='Enter'){e.preventDefault();enter()}else if(e.key==='Backspace'){e.preventDefault();backspace()}else if(e.key==='Tab'&&e.target.tagName!=='BUTTON'){e.preventDefault();insert('    ')}else if(e.key.length===1&&!e.altKey){e.preventDefault();insert(e.key)}});
-document.addEventListener('paste',e=>{if(e.target.tagName==='INPUT')return;const s=e.clipboardData?.getData('text/plain');if(s!==undefined){e.preventDefault();insert(s)}});
+document.addEventListener('paste',e=>{if(document.getElementById('duoStage').dataset.page==='notebook')return;if(e.target.tagName==='INPUT')return;const s=e.clipboardData?.getData('text/plain');if(s!==undefined){e.preventDefault();insert(s)}});
 
 // Touchpad: direct 2-axis scrolling with adjustable gain, no caret movement.
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -283,10 +350,11 @@ keyboard();renderEditor();renderConsole();syncClicks();
 // GitHub Pages has no custom headers. Restrict isolation to this beta directory.
 if(!crossOriginIsolated&&'serviceWorker'in navigator&&window.isSecureContext&&window.top===window.self){
  navigator.serviceWorker.register('./isolation.js',{scope:'./'}).then(()=>navigator.serviceWorker.ready).then(()=>{
-  const reload=()=>{try{if(sessionStorage.getItem('duopy-coi-reload'))return;sessionStorage.setItem('duopy-coi-reload','1')}catch{return}if(!busy)location.reload()};
+  const reload=()=>{try{if(sessionStorage.getItem('duopy-coi-reload'))return;sessionStorage.setItem('duopy-coi-reload','1')}catch{return}if(!busy&&!window.duopyNotebookBusy)location.reload()};
   if(navigator.serviceWorker.controller)reload();else navigator.serviceWorker.addEventListener('controllerchange',reload,{once:true});
  }).catch(()=>{});
 }
 </script>
+<script src="./notebook.js"></script>
 </body>
 </html>

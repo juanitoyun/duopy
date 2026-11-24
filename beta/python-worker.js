@@ -17,12 +17,13 @@ function reportMeta(){try{const data=JSON.parse(py.runPython("import sys, json, 
 async function init(){importScripts(CDN+'pyodide.js');py=await loadPyodide({indexURL:CDN});py.setStdout({write});py.setStderr({write});py.setStdin({stdin});reset();reportMeta();send('ready')}
 onmessage=async e=>{const m=e.data;
  if(m.type==='init'){channel=m.channel;ready=init();try{await ready}catch(err){send('fatal',String(err))}return}
- if(m.type!=='script'&&m.type!=='repl')return;
+ if(m.type!=='script'&&m.type!=='repl'&&m.type!=='cell')return;
+ let ok=true;
  try{await ready;count=0;decoder=new TextDecoder();if(m.type==='script')reset();
  // Standard library is bundled; supported external packages can be loaded on demand.
  await py.loadPackagesFromImports(m.code);
  const result=await py.runPythonAsync(m.code,{globals:ns,filename:m.type==='script'?(m.filename||'programa.py'):'<console>'});
- if(m.type==='repl'&&result!==undefined){if(result===null){}else if(typeof result==='object'&&typeof result.destroy==='function'){ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}else{ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}}
+ if((m.type==='repl'||m.type==='cell')&&result!==undefined){if(result===null){}else if(typeof result==='object'&&typeof result.destroy==='function'){ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}else{ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}}
  if(result&&typeof result.destroy==='function')result.destroy();
- }catch(err){send('out',String(err)+'\n')}finally{const rest=decoder.decode();if(rest)send('out',rest);reportMeta();send('done')}
+ }catch(err){ok=false;send('out',String(err)+'\n')}finally{const rest=decoder.decode();if(rest)send('out',rest);reportMeta();postMessage({type:'done',ok})}
 };

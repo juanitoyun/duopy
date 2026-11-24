@@ -1,4 +1,4 @@
-# DuoPy β 0.4
+# DuoPy β 0.5
 
 Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.github.io/duopy/beta/ si GitHub Pages publica main desde la raíz.
 
@@ -24,3 +24,10 @@ Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.g
 - SPD: 0.4× por defecto, mantiene preferencias guardadas.
 - LIB (EDIT): lee beta/scripts/index.json y copia archivos .py al editor; no escribe en GitHub. El borrador personal permanece en localStorage; la copia temporal se conserva en sessionStorage hasta cerrar la pestaña. LIB → Mi script restaura el borrador. SAVE descarga la copia actual.
 - Para incorporar algoritmos: añadir un .py en beta/scripts/ y una entrada {"file":"nombre.py","title":"Título","category":"Tema"} al índice JSON.
+
+## Notebooks
+- ⌃ sube al visor de notebooks; ⌄ vuelve a la consola. Ambos paneles permanecen montados y la animación respeta prefers-reduced-motion.
+- Visor .ipynb v4 Python de solo lectura. Abrir archivo local o biblioteca en beta/notebooks/. Las celdas se ejecutan individualmente o con ▶▶; mantienen un worker independiente del editor. ■ interrumpe y reinicia el kernel; ↻ reinicia y limpia outputs. Run All se detiene ante error.
+- ⧉ copia selección de texto o código de la celda al portapapeles interno (PST en EDIT) y, cuando el navegador lo permita, al portapapeles del sistema. No se escriben notebooks originales. Touchpad y flechas para navegar.
+- Markdown básico, texto de salida y PNG/JPEG guardados; no HTML activo, widgets, LaTeX renderizado ni gráficos nuevos inline. No es JupyterLab ni IPython completo. input() usa un campo nativo opcional y requiere aislamiento como en la consola. El estado del notebook vive en memoria de la pestaña, no sobrevive a recargar.
+- Abrir una celda no ejecuta código automáticamente. Ejecutar solo notebooks de confianza.
