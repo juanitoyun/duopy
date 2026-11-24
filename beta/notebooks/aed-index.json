@@ -1,0 +1,1577 @@
+{
+  "repository": "ivansipiran/AED-Apuntes",
+  "revision": "7d8ef60e45a1923f855b5777b60696b074a7a445",
+  "tree": "4d95b21b1128bf8ee79a3e5c0a2684dcb18d39a2",
+  "files": [
+    {
+      "path": "01_Introduccion.ipynb",
+      "sha": "b882c9d71e940aca993cd0201e0770f16ecc2aaa",
+      "size": 73150
+    },
+    {
+      "path": "02_Metodos_Matematicos_para_el_Analisis_de_Algoritmos.ipynb",
+      "sha": "cf68ae7952111d26cea8764adf4ade4744c01088",
+      "size": 49211
+    },
+    {
+      "path": "03_Diseño_de_Algoritmos_Eficientes.ipynb",
+      "sha": "f35620defa8cc1f5528843d726f98afa7ed2b6fe",
+      "size": 46776
+    },
+    {
+      "path": "04_Estructuras_de_Datos_Elementales.ipynb",
+      "sha": "300cd46286ad15c09661c254afaeef748ef44cf0",
+      "size": 99175
+    },
+    {
+      "path": "05_Pilas_Colas_y_Colas_de_Prioridad.ipynb",
+      "sha": "d69b5686a814c09525dbf770a45c77534e983a97",
+      "size": 40212
+    },
+    {
+      "path": "06_Diccionarios.ipynb",
+      "sha": "49a20b0ff0ff216e5ce45faf69ddb8c41318eb77",
+      "size": 150846
+    },
+    {
+      "path": "07_Ordenacion.ipynb",
+      "sha": "ff6dc3c434407910cdb97a2ea61af79b7c36f6bc",
+      "size": 37847
+    },
+    {
+      "path": "08_Busqueda_en_Texto.ipynb",
+      "sha": "80b581c3b80764c879b81140d47c282957ee17b6",
+      "size": 19360
+    },
+    {
+      "path": "09_Compresion_de_Datos.ipynb",
+      "sha": "612e014fc9e5643a99dc86c67ff3ee76670b3a7f",
+      "size": 10926
+    },
+    {
+      "path": "10_Grafos.ipynb",
+      "sha": "2a7143621bc99ed1014fc47237241fc98631e0eb",
+      "size": 32712
+    },
+    {
+      "path": "Ejercicios/.ipynb_checkpoints/01_Ejercicios-checkpoint.ipynb",
+      "sha": "b53e47e05e734d4d6de7eddfc621c0cbfb7278de",
+      "size": 7979
+    },
+    {
+      "path": "Ejercicios/.ipynb_checkpoints/02_Ejercicios-checkpoint.ipynb",
+      "sha": "d288eddc88500d846d6275a6b1a24981390093ee",
+      "size": 1923
+    },
+    {
+      "path": "Ejercicios/.ipynb_checkpoints/03_Ejercicios-checkpoint.ipynb",
+      "sha": "2f07a56395054e0ba5c05fab056c8d4aefd13777",
+      "size": 3491
+    },
+    {
+      "path": "Ejercicios/.ipynb_checkpoints/04_Ejercicios-checkpoint.ipynb",
+      "sha": "f1a016440d76c47a29a880a676b0600631526445",
+      "size": 6172
+    },
+    {
+      "path": "Ejercicios/01_Ejercicios.ipynb",
+      "sha": "3c290a76b98a5be822cccd3e450df400797a5ad8",
+      "size": 18627
+    },
+    {
+      "path": "Ejercicios/02_Ejercicios.ipynb",
+      "sha": "d288eddc88500d846d6275a6b1a24981390093ee",
+      "size": 1923
+    },
+    {
+      "path": "Ejercicios/03_Ejercicios.ipynb",
+      "sha": "5b66c3ed7a90179b877680b9b04eb6f1d0f2d4de",
+      "size": 10204
+    },
+    {
+      "path": "Ejercicios/04_Ejercicios.ipynb",
+      "sha": "2ab86e10c677dab059373ede7a86a19761377ee7",
+      "size": 12884
+    },
+    {
+      "path": "Ejercicios/05_Ejercicios.ipynb",
+      "sha": "aa271ed3f9d0e58faf141045c78a65d5367f53b8",
+      "size": 7823
+    },
+    {
+      "path": "Ejercicios/06_Ejercicios.ipynb",
+      "sha": "f536605eadf32338050787023239053938b4fe1a",
+      "size": 27222
+    },
+    {
+      "path": "Ejercicios/07_Ejercicios.ipynb",
+      "sha": "352aeaf58e6bf7391b7963a21cd4251d419e193a",
+      "size": 9964
+    },
+    {
+      "path": "README.md",
+      "sha": "5dadc0266fdf77ec27b49a59f6b437d57d7e86bf",
+      "size": 4000
+    },
+    {
+      "path": "recursos/AVL1.drawio",
+      "sha": "7ea256f92cca3660d895498f0b7c25b60ce2ffea",
+      "size": 2234
+    },
+    {
+      "path": "recursos/AVL1.png",
+      "sha": "5c8805dc28b93897022b7491de3c4f009473adeb",
+      "size": 21588
+    },
+    {
+      "path": "recursos/AVL2.drawio",
+      "sha": "37e1932e5d2de0dfb5b633bcdf69e2bfd2b18339",
+      "size": 1678
+    },
+    {
+      "path": "recursos/AVL2.png",
+      "sha": "063b5bae9b0aa72b322f4f40c48892f3f3cebda6",
+      "size": 12347
+    },
+    {
+      "path": "recursos/AVL3.drawio",
+      "sha": "c53bda89a6499af2f92ee35533c4c877baab3851",
+      "size": 3108
+    },
+    {
+      "path": "recursos/AVL3.png",
+      "sha": "33a9e8e10bf7744b5bfd95f9483fefb59af23fb7",
+      "size": 30062
+    },
+    {
+      "path": "recursos/ColorHanoi.jpg",
+      "sha": "7f7e280023e17d5a4f4c74f9c3d87f87f99f1098",
+      "size": 18144
+    },
+    {
+      "path": "recursos/DFS.drawio",
+      "sha": "8917b816e7fd6d248e0bc87f5a7ba9d2e0764b51",
+      "size": 2754
+    },
+    {
+      "path": "recursos/DFS.png",
+      "sha": "cd94943687282bdb9ca44ed200a94867def33d38",
+      "size": 32524
+    },
+    {
+      "path": "recursos/EjercicioLinearProbing.drawio",
+      "sha": "8be25cf1cbd8e9dc0eb008fef1feb00f8f26d18c",
+      "size": 1076
+    },
+    {
+      "path": "recursos/EjercicioLinearProbing.png",
+      "sha": "11bc16648626c9f16ed86d98f37ce10fb471adcb",
+      "size": 7424
+    },
+    {
+      "path": "recursos/Enum-arboles-binarios.lyx",
+      "sha": "cefb6b24b8d47d4b3d85cd941bfce213b8dd09e9",
+      "size": 2956
+    },
+    {
+      "path": "recursos/Enum-arboles-binarios.png",
+      "sha": "fccdee666be193799e19a0a2b72bde07aaa77ec3",
+      "size": 7296
+    },
+    {
+      "path": "recursos/LinearProbing.gif",
+      "sha": "58525984f142ac32b66c35a414812ddf6cbf2592",
+      "size": 1511
+    },
+    {
+      "path": "recursos/Nodo-None.lyx",
+      "sha": "5e3ddb7aa72e343ba1fd4430ab861d6db3b9da43",
+      "size": 2647
+    },
+    {
+      "path": "recursos/Nodo-None.png",
+      "sha": "9426124eb12e5f7c28ad32a36d55a63ced1afd96",
+      "size": 7052
+    },
+    {
+      "path": "recursos/Nodo-arbol-binario-circular.lyx",
+      "sha": "47638594526c2aa00e7a64aac5db51dedd4d8098",
+      "size": 2115
+    },
+    {
+      "path": "recursos/Nodo-arbol-binario-circular.png",
+      "sha": "c159f6de9be581a993e27cea5f6cc78ebc7fb25e",
+      "size": 7786
+    },
+    {
+      "path": "recursos/Nodo-arbol-binario.lyx",
+      "sha": "94280dab527de60568ffc4aa4063b6cb2a99c030",
+      "size": 2717
+    },
+    {
+      "path": "recursos/Nodo-arbol-binario.png",
+      "sha": "f3845302c881ae70c60cf89f88b3452c9ea7e725",
+      "size": 10751
+    },
+    {
+      "path": "recursos/Nodo-circular-None.lyx",
+      "sha": "86f2f0acc922b872a56b7ebad5c7b95443a5d445",
+      "size": 1930
+    },
+    {
+      "path": "recursos/Nodo-circular-None.png",
+      "sha": "ff6256c6b13e3c25eab7de638819367a012f205c",
+      "size": 5409
+    },
+    {
+      "path": "recursos/Nodo-circular-cuadrado.lyx",
+      "sha": "cb36bb3b71f5988089fadba3d52690f57127fe74",
+      "size": 2149
+    },
+    {
+      "path": "recursos/Nodo-circular-cuadrado.png",
+      "sha": "033edfff8059cfd2c4082a93f74fe9d62c3784fc",
+      "size": 5658
+    },
+    {
+      "path": "recursos/Nodo-circular.lyx",
+      "sha": "3fb7ec77190291ba227e710dda0bca490657ad96",
+      "size": 2020
+    },
+    {
+      "path": "recursos/Nodo-circular.png",
+      "sha": "e0b972f14940b4415445662dd958b6da3ba77cf6",
+      "size": 5483
+    },
+    {
+      "path": "recursos/Nodo-doble.lyx",
+      "sha": "f9fa201175b3e937656feb14e1b9cfdfb53164d2",
+      "size": 2722
+    },
+    {
+      "path": "recursos/Nodo-doble.png",
+      "sha": "084cc075b353a33e172c3e88b837d8639e1eb119",
+      "size": 11234
+    },
+    {
+      "path": "recursos/Nodo.lyx",
+      "sha": "72c55b7abbca18862cabd5b419d07f210ed0d53b",
+      "size": 2377
+    },
+    {
+      "path": "recursos/Nodo.png",
+      "sha": "7b0314902f7112d7f877c19f44ba35e91f84aee8",
+      "size": 6863
+    },
+    {
+      "path": "recursos/README-gif.txt",
+      "sha": "6ca3005a82dbe1e86bd5f260715cce8457e84f10",
+      "size": 79
+    },
+    {
+      "path": "recursos/README.md",
+      "sha": "1f09a69582c43110417182d81f0b555c9f3f9b22",
+      "size": 237
+    },
+    {
+      "path": "recursos/Tabla de Contenidos.ipynb",
+      "sha": "f8fb7b170dcebedf198061b9f6f0e29033fff124",
+      "size": 2020
+    },
+    {
+      "path": "recursos/_config.yml",
+      "sha": "c4192631f25b34d77a7f159aa0da0e3ae99c4ef4",
+      "size": 26
+    },
+    {
+      "path": "recursos/abbopt1.png",
+      "sha": "a300514e72dc909ba59b5ac7e96ec1414c8ea51a",
+      "size": 3923
+    },
+    {
+      "path": "recursos/abd.drawio",
+      "sha": "82c618fd597dec7ff6d363dfa2166ef2ee5c3b61",
+      "size": 1880
+    },
+    {
+      "path": "recursos/abd.png",
+      "sha": "1a313cdba80c99b5b8ae249789390eb5f7458743",
+      "size": 16910
+    },
+    {
+      "path": "recursos/actividades.lyx",
+      "sha": "fbe0f6aa3804d836b8967633181ec0b8da0f03b1",
+      "size": 2974
+    },
+    {
+      "path": "recursos/actividades.pdf",
+      "sha": "74487fbd6dff668fc536d1b63e76d8896ee48e4b",
+      "size": 19522
+    },
+    {
+      "path": "recursos/actividades.png",
+      "sha": "0bda1eaef2176c9ba424e1c894c649256e4f87cd",
+      "size": 10273
+    },
+    {
+      "path": "recursos/arbol-decision-ordenacion.gif",
+      "sha": "19c2d6fc3ead7995380e188639e8c043e853ed0e",
+      "size": 3795
+    },
+    {
+      "path": "recursos/arbol-formula.png",
+      "sha": "1e8bf1df47b383cea6d11bf884b082d8131b42ee",
+      "size": 18041
+    },
+    {
+      "path": "recursos/arbol-formula.txt",
+      "sha": "1d68c4f403a661854397805d2ffba5b2f49523b5",
+      "size": 238
+    },
+    {
+      "path": "recursos/arbol-particion.gif",
+      "sha": "e3c76aca6259fff51b4d967864289535933ac1e5",
+      "size": 3022
+    },
+    {
+      "path": "recursos/arbol.drawio",
+      "sha": "c9ab98a3a014067ef48be845db44ae19a8a6767f",
+      "size": 1526
+    },
+    {
+      "path": "recursos/arbol.png",
+      "sha": "b53d337ce5abc1d9137cd8176a98e3a3bc6bb1b2",
+      "size": 9241
+    },
+    {
+      "path": "recursos/arboles-fibonacci.lyx",
+      "sha": "f0110d56ce8eb63c8842f422e40420609877dc76",
+      "size": 3796
+    },
+    {
+      "path": "recursos/arboles-fibonacci.png",
+      "sha": "67691e7d3e872dafd8126aa577354f1d4c7ea3a2",
+      "size": 7737
+    },
+    {
+      "path": "recursos/bitmap.png",
+      "sha": "888c6266a0b6fffe78b6ccb1de28f8cf493d701a",
+      "size": 4319
+    },
+    {
+      "path": "recursos/bmh1.drawio",
+      "sha": "487258a7486f20e1a7fdc0f87216aff94f6bb99f",
+      "size": 1613
+    },
+    {
+      "path": "recursos/bmh1.gif",
+      "sha": "b5aeaa11bc9ddb063ae632cd39cfe4760bf12e8f",
+      "size": 3836
+    },
+    {
+      "path": "recursos/bmh1.png",
+      "sha": "8a654d3ca433031a7d576c8852cc193cb6572206",
+      "size": 9586
+    },
+    {
+      "path": "recursos/bmh2.drawio",
+      "sha": "4979c5be27778580dea1fca10e73f1aa6f534ee9",
+      "size": 1597
+    },
+    {
+      "path": "recursos/bmh2.png",
+      "sha": "de903834f8d1ed6752946e24598e182f51aec65b",
+      "size": 9483
+    },
+    {
+      "path": "recursos/bmh3.drawio",
+      "sha": "8436144f13c8a6698d5c7c7142693eb9ed52b0d8",
+      "size": 1581
+    },
+    {
+      "path": "recursos/bmh3.png",
+      "sha": "7b2a101881800ef35fc4aaa0bad6e633e444a894",
+      "size": 15312
+    },
+    {
+      "path": "recursos/bms1.drawio",
+      "sha": "e85d538b4c05dd0ecad8ddea6eeed5d198c6e9ca",
+      "size": 1749
+    },
+    {
+      "path": "recursos/bms1.png",
+      "sha": "8afccb9489548d9f6071a7c914c5cefebb45b175",
+      "size": 10138
+    },
+    {
+      "path": "recursos/bms2.drawio",
+      "sha": "580704639335e6a1ff375bc11340391497957d18",
+      "size": 1737
+    },
+    {
+      "path": "recursos/bms2.png",
+      "sha": "ff09fddcd4f43ff51cfb15e8756a900fa4d0a26b",
+      "size": 10346
+    },
+    {
+      "path": "recursos/bms3.drawio",
+      "sha": "544dfdae07df4153864c33c254136fdd79bfa6f4",
+      "size": 1525
+    },
+    {
+      "path": "recursos/bms3.png",
+      "sha": "7d19be4771e2cfb5537b35cb538b968dfeddf7b8",
+      "size": 13251
+    },
+    {
+      "path": "recursos/bruta1.drawio",
+      "sha": "c23438788dc396e855ebbccca5ec4b412e6e0a7c",
+      "size": 1329
+    },
+    {
+      "path": "recursos/bruta1.gif",
+      "sha": "392e16a43130ba0f65d2ed6724eed317ed4a173a",
+      "size": 2172
+    },
+    {
+      "path": "recursos/bruta1.png",
+      "sha": "100172db071c982b5f09c22b3f72b41a95f9a9bf",
+      "size": 7233
+    },
+    {
+      "path": "recursos/bruta2.drawio",
+      "sha": "4422db9a6f83954b887e6fc175aa68cc0b4558dc",
+      "size": 1305
+    },
+    {
+      "path": "recursos/bruta2.gif",
+      "sha": "ed5cc91026d6ac745a66013b33d4749dcbac2108",
+      "size": 2863
+    },
+    {
+      "path": "recursos/bruta2.png",
+      "sha": "996dd24075334c8d0c8a65d7316f88f1cde314ca",
+      "size": 7122
+    },
+    {
+      "path": "recursos/bruta3.drawio",
+      "sha": "50ce7b5085865d21a0db9f89f655feae7c25fd01",
+      "size": 1329
+    },
+    {
+      "path": "recursos/bruta3.png",
+      "sha": "72df7390e925d6cafc0b178a5a1bb88c729c7a1b",
+      "size": 7253
+    },
+    {
+      "path": "recursos/bruta4.drawio",
+      "sha": "8dbcb3658af3c08e0a77e06017a3b878e77259ac",
+      "size": 1277
+    },
+    {
+      "path": "recursos/bruta4.png",
+      "sha": "3247e18ef36dc48edccac4c0171c90f16f37309c",
+      "size": 7262
+    },
+    {
+      "path": "recursos/bucket-pass.gif",
+      "sha": "515d0b50f53050bef134de9c63ec30d028f3b5fa",
+      "size": 3910
+    },
+    {
+      "path": "recursos/camino.drawio",
+      "sha": "9909db6d79df5a1a9c40e845a04a65c4d251c958",
+      "size": 1522
+    },
+    {
+      "path": "recursos/camino.png",
+      "sha": "0a87a39d7987918a9e96583311ff8fc38332a2b2",
+      "size": 8964
+    },
+    {
+      "path": "recursos/cap1.txt",
+      "sha": "c588911a1b808c7cab08a05445b2986a58cc6363",
+      "size": 10367
+    },
+    {
+      "path": "recursos/cardinal.png",
+      "sha": "fd330b997b853ed0f57254d763ad0395da35ab34",
+      "size": 28914
+    },
+    {
+      "path": "recursos/cardinal.txt",
+      "sha": "ab8a0c9f52072e67cfa308cc424bcdbfdbb6ed33",
+      "size": 414
+    },
+    {
+      "path": "recursos/cartesian-tree.png",
+      "sha": "e7e2f411eb9161c8056b0dbb518a9dda01852568",
+      "size": 15583
+    },
+    {
+      "path": "recursos/cartesian-tree.txt",
+      "sha": "c4f8d014691ffa53b2eadd543740d26e38e475e7",
+      "size": 265
+    },
+    {
+      "path": "recursos/ciclo.drawio",
+      "sha": "8a901df1d657b93484b4820ec9dca9ad9d6cf95b",
+      "size": 1522
+    },
+    {
+      "path": "recursos/ciclo.png",
+      "sha": "dcd5aad4a064897698c903806699d56599db8862",
+      "size": 9291
+    },
+    {
+      "path": "recursos/clusters.gif",
+      "sha": "11edd9c0eb50ae1e1bba720fb883dda89ede8d4c",
+      "size": 954
+    },
+    {
+      "path": "recursos/cola-arreglo.lyx",
+      "sha": "1988d1a80b7072fe5b3f09ecb22f16f87277ede6",
+      "size": 5960
+    },
+    {
+      "path": "recursos/cola-arreglo.png",
+      "sha": "bc37e49dd76572fefb61dabb0185b0fb80fe2a82",
+      "size": 22000
+    },
+    {
+      "path": "recursos/cola-lista.lyx",
+      "sha": "5f8f9bb7f2a8672afad3a3c4b43d6ed7225d9481",
+      "size": 4555
+    },
+    {
+      "path": "recursos/cola-lista.png",
+      "sha": "cc2d24eb041e535aa12734b8c853586b971a1571",
+      "size": 16077
+    },
+    {
+      "path": "recursos/cola.lyx",
+      "sha": "d0df981b22db7d26e14e48734ea5df62573ad2c7",
+      "size": 3124
+    },
+    {
+      "path": "recursos/cola.png",
+      "sha": "c5e557569b6c9da6425dd576d4d65cf9e3179be8",
+      "size": 7149
+    },
+    {
+      "path": "recursos/condicion-AVL.lyx",
+      "sha": "46759cbc931bfe5d7f67941e815176b380708da3",
+      "size": 2596
+    },
+    {
+      "path": "recursos/condicion-AVL.png",
+      "sha": "09fa78a98445204cd474dac601a2445c78642571",
+      "size": 11484
+    },
+    {
+      "path": "recursos/decision-tree.png",
+      "sha": "1c99f25d517debb4d7d3957f472623d5332d5412",
+      "size": 40237
+    },
+    {
+      "path": "recursos/decision-tree.txt",
+      "sha": "5f95ab05260b3ae58fc30e2552058755f63d8c93",
+      "size": 634
+    },
+    {
+      "path": "recursos/ejemplo-2-3.png",
+      "sha": "3d805485bd260754744ee9362bb64f3fd9a9843a",
+      "size": 7035
+    },
+    {
+      "path": "recursos/ejemplo-ABB.png",
+      "sha": "fe642b07c305f6e6dd3b7735edfb725539719bd5",
+      "size": 36439
+    },
+    {
+      "path": "recursos/ejemplo-ABB.txt",
+      "sha": "2dcf86affffceae30d4ee4f07bcad02e1d417e97",
+      "size": 352
+    },
+    {
+      "path": "recursos/ejemplo-AVL.png",
+      "sha": "117609eb7213151e2cf56f3000276cc11e6216ab",
+      "size": 11958
+    },
+    {
+      "path": "recursos/ejemplo-arreglo.lyx",
+      "sha": "7066f853ba89fe9ed7046368fb5b207be6ca295c",
+      "size": 3954
+    },
+    {
+      "path": "recursos/ejemplo-arreglo.png",
+      "sha": "1cab9222b3898a64996a31f452395309d2b79363",
+      "size": 12951
+    },
+    {
+      "path": "recursos/ejemplo-no-AVL.png",
+      "sha": "a37c59a17c60eab0c5f6fde68a04b593785d47e5",
+      "size": 11976
+    },
+    {
+      "path": "recursos/eliminacion2-3a.gif",
+      "sha": "bdc66fdc2da371dbbea97e2804817f2a3ca0b2f7",
+      "size": 1855
+    },
+    {
+      "path": "recursos/eliminacion2-3b.gif",
+      "sha": "0e242fcaefd6e36dee9d26427963d837e91f31d3",
+      "size": 3547
+    },
+    {
+      "path": "recursos/eliminacion2-3c.gif",
+      "sha": "18ca10b84f03430703f48943632f98935496ed95",
+      "size": 3099
+    },
+    {
+      "path": "recursos/eliminacionABB1.gif",
+      "sha": "c056c713d7e1e0daa838293e17faf637ad52e85e",
+      "size": 2783
+    },
+    {
+      "path": "recursos/eliminacionABB2.gif",
+      "sha": "fca847c2dd5e1409845cae99465ea823561b2697",
+      "size": 3116
+    },
+    {
+      "path": "recursos/eliminacionABB3.gif",
+      "sha": "76899da3ebb80188677625e630e1f60e08e03383",
+      "size": 4013
+    },
+    {
+      "path": "recursos/encadenamiento.gif",
+      "sha": "f539fe76b4610ba021aa3b148414cfc851fea66a",
+      "size": 1660
+    },
+    {
+      "path": "recursos/esquema-ABB2.png",
+      "sha": "d8b21f7d5714bd9bd7a56a95ca224f87ae8b03e0",
+      "size": 7912
+    },
+    {
+      "path": "recursos/floyd.gif",
+      "sha": "212710d5ccbea5c1c530654fcf1aaa5375489fc8",
+      "size": 1132
+    },
+    {
+      "path": "recursos/grafo-dirigido.drawio",
+      "sha": "e9d04e48b4b71493e360276b89493fe4bb33cbfc",
+      "size": 1602
+    },
+    {
+      "path": "recursos/grafo-dirigido.png",
+      "sha": "95abc34c43a0e539055f2d5feb3148bd1ea4ab58",
+      "size": 12086
+    },
+    {
+      "path": "recursos/grafo-no-dirigido.drawio",
+      "sha": "498148b9d0da785a9938d0138fd1948dd389857e",
+      "size": 1506
+    },
+    {
+      "path": "recursos/grafo-no-dirigido.png",
+      "sha": "499b7aa82251d11e95e37470c398eef85b23bc7e",
+      "size": 8919
+    },
+    {
+      "path": "recursos/hanoi.gif",
+      "sha": "3674fe96c5ae53df8158a3486e6180689b060bbf",
+      "size": 1001
+    },
+    {
+      "path": "recursos/heap-arbol.lyx",
+      "sha": "dddc18e0db1238b5ae0ba98b6009fd307b3516b4",
+      "size": 5076
+    },
+    {
+      "path": "recursos/heap-arbol.png",
+      "sha": "0d52fec433eb0bd2ca6114e30cc477d80fd86ca8",
+      "size": 30703
+    },
+    {
+      "path": "recursos/heap-arreglo.lyx",
+      "sha": "34a18677a074d0e195e9974888daedfe06968144",
+      "size": 4474
+    },
+    {
+      "path": "recursos/heap-arreglo.png",
+      "sha": "5d1ba9d0559619672ee0ae0f4e9d5a75cdf3df58",
+      "size": 12434
+    },
+    {
+      "path": "recursos/heap-cons.gif",
+      "sha": "db0635d79a7066add6db1a5c63bcd3427982a511",
+      "size": 2329
+    },
+    {
+      "path": "recursos/heap-cons2.gif",
+      "sha": "2f2817372f18971a30eaab02fa2ada6ff3a78cfe",
+      "size": 2341
+    },
+    {
+      "path": "recursos/heap-extract.gif",
+      "sha": "7ba9d1558de1f34e991d34c18044d19c505c3cf6",
+      "size": 1623
+    },
+    {
+      "path": "recursos/heap-ins.gif",
+      "sha": "4beae5523736b1b6f6603fbdd6c483274adc8fcf",
+      "size": 1369
+    },
+    {
+      "path": "recursos/heap-ord.gif",
+      "sha": "343c91b9b6240c52d5565e0950fa1b17b82df08a",
+      "size": 2651
+    },
+    {
+      "path": "recursos/huffman.gif",
+      "sha": "3c3b057ee92571e4b841a6e5d9f692f2151318dd",
+      "size": 10387
+    },
+    {
+      "path": "recursos/insercion-2-3-binario.png",
+      "sha": "56c0b41d8ad4deea341b6771cb18a2b3aee0ed48",
+      "size": 5850
+    },
+    {
+      "path": "recursos/insercion-2-3-ternario.png",
+      "sha": "07f8d948d6818c56666e21fbb78da13575c09a75",
+      "size": 9352
+    },
+    {
+      "path": "recursos/insercion.lyx",
+      "sha": "d38474b2425e36fa34d510dc6878a1667b154d68",
+      "size": 4251
+    },
+    {
+      "path": "recursos/insercion.png",
+      "sha": "8f08bb28ec456cf64630f8713ddd20f77e293059",
+      "size": 8403
+    },
+    {
+      "path": "recursos/insercionABB.gif",
+      "sha": "c0a3ff34da707f4cb1a4a2925e6047e818345fae",
+      "size": 2833
+    },
+    {
+      "path": "recursos/inserciones-2-3.png",
+      "sha": "e50296088e1db78027c7de742cdd82aa07f2487f",
+      "size": 33351
+    },
+    {
+      "path": "recursos/invariante-matriz.png",
+      "sha": "c2eeb94c7d136287fe3553e28493f9236299a983",
+      "size": 67058
+    },
+    {
+      "path": "recursos/kmp1.drawio",
+      "sha": "9d755fdd6749abdda09925af699d22f4a622fd3f",
+      "size": 1589
+    },
+    {
+      "path": "recursos/kmp1.gif",
+      "sha": "0500998993cadb567d7837cb46b51733052a6dba",
+      "size": 2014
+    },
+    {
+      "path": "recursos/kmp1.png",
+      "sha": "ed3d2ea790eafc1c5d76a88c212b0320834f696c",
+      "size": 10838
+    },
+    {
+      "path": "recursos/kmp2.drawio",
+      "sha": "42906e981a04ca3d350c93df5f32ad3df227acd1",
+      "size": 1417
+    },
+    {
+      "path": "recursos/kmp2.gif",
+      "sha": "11b73953e7ef4a16dff480eb94cc62678bb3ab8b",
+      "size": 1996
+    },
+    {
+      "path": "recursos/kmp2.png",
+      "sha": "448ac5c93b4aff42e44abc3c96f84a68d7ee8a68",
+      "size": 10328
+    },
+    {
+      "path": "recursos/kmp3",
+      "sha": "2e8301368e82477c5517787d5451ce4011174f41",
+      "size": 1981
+    },
+    {
+      "path": "recursos/kmp3.drawio",
+      "sha": "d643869d2d83cd627808999da149d6d003aa798a",
+      "size": 1997
+    },
+    {
+      "path": "recursos/kmp3.gif",
+      "sha": "46d14aadeb9f40fbe920427eabc14b13d558ead9",
+      "size": 2388
+    },
+    {
+      "path": "recursos/kmp3.png",
+      "sha": "bc0bc1c0cc2791ab3dce0325f5fce998268ebec4",
+      "size": 17628
+    },
+    {
+      "path": "recursos/kmp4.drawio",
+      "sha": "69736b9eb4f600a109deb59576867407318520f1",
+      "size": 1405
+    },
+    {
+      "path": "recursos/kmp4.gif",
+      "sha": "2e284b2c57f871a6f5c9f130f3b4ad06d10138de",
+      "size": 2207
+    },
+    {
+      "path": "recursos/kmp4.png",
+      "sha": "4619458e239ef7de47caf0997a74434ed49a9d76",
+      "size": 13175
+    },
+    {
+      "path": "recursos/kmp5",
+      "sha": "96438247e0d2c6859166609c8b3161582f50aaea",
+      "size": 1741
+    },
+    {
+      "path": "recursos/kmp5.drawio",
+      "sha": "96438247e0d2c6859166609c8b3161582f50aaea",
+      "size": 1741
+    },
+    {
+      "path": "recursos/kmp5.gif",
+      "sha": "f4b67446e8345a6331d99f8122249c2e73efa090",
+      "size": 1633
+    },
+    {
+      "path": "recursos/kmp5.png",
+      "sha": "cdcf34f663a3bdea70d43e707c449cca339d2645",
+      "size": 12062
+    },
+    {
+      "path": "recursos/kruskal-0.drawio",
+      "sha": "9e7e2eedbb00c82216867dae75cf494ad90586ba",
+      "size": 1766
+    },
+    {
+      "path": "recursos/kruskal-0.png",
+      "sha": "33e1555a1bb765e8704abebbeb536048d27b1332",
+      "size": 11592
+    },
+    {
+      "path": "recursos/kruskal-1.drawio",
+      "sha": "cf30a8b750cfd9951fb3b98c04edd3e607516f34",
+      "size": 1774
+    },
+    {
+      "path": "recursos/kruskal-1.png",
+      "sha": "12f1789feebdc9dc14c3bb295fc396691b217e02",
+      "size": 11636
+    },
+    {
+      "path": "recursos/kruskal-10.drawio",
+      "sha": "a8ee2a21bfb441abf0bac90ad069b85f3a0b1679",
+      "size": 1782
+    },
+    {
+      "path": "recursos/kruskal-10.png",
+      "sha": "601fd805ff932256a61e1e1ea8b86e1c411203ae",
+      "size": 11376
+    },
+    {
+      "path": "recursos/kruskal-2.drawio",
+      "sha": "0bf29e57716f00ecfa4fcd770a8b6f3b54f3e138",
+      "size": 1774
+    },
+    {
+      "path": "recursos/kruskal-2.png",
+      "sha": "ebe3cfac19bbb11246b211032177c5c326cb0afe",
+      "size": 11704
+    },
+    {
+      "path": "recursos/kruskal-3.drawio",
+      "sha": "46ae60a333ff0c836f8e1e3001daa535356f2a48",
+      "size": 1782
+    },
+    {
+      "path": "recursos/kruskal-3.png",
+      "sha": "b173dd0749c93a72fc518c26334174d231cbfa24",
+      "size": 11674
+    },
+    {
+      "path": "recursos/kruskal-4.drawio",
+      "sha": "da7543a87ae53b8ee0c6e8c2becce4cb2c48b718",
+      "size": 1778
+    },
+    {
+      "path": "recursos/kruskal-4.png",
+      "sha": "e67f4cba5550d5d2a0d9a1c27be5a8f3c16de40b",
+      "size": 11674
+    },
+    {
+      "path": "recursos/kruskal-5.drawio",
+      "sha": "3a80cd604ca4683b4a40d758e5c1955f55176f2b",
+      "size": 1850
+    },
+    {
+      "path": "recursos/kruskal-5.png",
+      "sha": "1ed59a30394f76704b6d9668cad6b84902c12f04",
+      "size": 12839
+    },
+    {
+      "path": "recursos/kruskal-6.drawio",
+      "sha": "0a558aeb42e7c69bde08933063e66ef316e3e1d8",
+      "size": 1778
+    },
+    {
+      "path": "recursos/kruskal-6.png",
+      "sha": "4a51d7eced56d1d934b7630a970cff34808d97ae",
+      "size": 11718
+    },
+    {
+      "path": "recursos/kruskal-7.drawio",
+      "sha": "56533d6bb87b0a01f9cdd380ba0121e8e7be2684",
+      "size": 1778
+    },
+    {
+      "path": "recursos/kruskal-7.png",
+      "sha": "a61a6acb89a888a60a308d101f2b331ebf4e5881",
+      "size": 11733
+    },
+    {
+      "path": "recursos/kruskal-8.drawio",
+      "sha": "543214d2e05012d831934948a4f3ae9fa74c3859",
+      "size": 1778
+    },
+    {
+      "path": "recursos/kruskal-8.png",
+      "sha": "4a3077361e63ec13d17ad5d1f23cfc958d6cd502",
+      "size": 11751
+    },
+    {
+      "path": "recursos/kruskal-9.drawio",
+      "sha": "2d7bba24100b04bce1d5b157f26c2097ff0e6ddb",
+      "size": 1862
+    },
+    {
+      "path": "recursos/kruskal-9.png",
+      "sha": "7d40b6ad6d1db0f4ac41b87a95a40dd0708eab7b",
+      "size": 12881
+    },
+    {
+      "path": "recursos/kruskal-base.drawio",
+      "sha": "9e7e2eedbb00c82216867dae75cf494ad90586ba",
+      "size": 1766
+    },
+    {
+      "path": "recursos/kruskal.gif",
+      "sha": "528c88b52da1a15c0578280240e3021b27c9c82b",
+      "size": 46833
+    },
+    {
+      "path": "recursos/lista-ejemplo-con-cabecera.lyx",
+      "sha": "440844400c2e37138d414d2be0a4ed9cb15e777e",
+      "size": 3583
+    },
+    {
+      "path": "recursos/lista-ejemplo-con-cabecera.png",
+      "sha": "2c26f1c40ca39a9135169ccee58003c7736c9601",
+      "size": 14514
+    },
+    {
+      "path": "recursos/lista-ejemplo-doble-enlace.lyx",
+      "sha": "ae8516c92a2a7a35019131ad601ebfce1f745298",
+      "size": 3998
+    },
+    {
+      "path": "recursos/lista-ejemplo-doble-enlace.png",
+      "sha": "a9d106434824560175bafcbbdd861a2af0f7ec15",
+      "size": 18290
+    },
+    {
+      "path": "recursos/lista-ejemplo.lyx",
+      "sha": "27b65ba64e414ef386b39e94e9ca4c0c04e9faa2",
+      "size": 3353
+    },
+    {
+      "path": "recursos/lista-ejemplo.png",
+      "sha": "b0c25c0a695de33c44798867c61bffd052c14eb6",
+      "size": 12546
+    },
+    {
+      "path": "recursos/median-of-medians.drawio",
+      "sha": "3b7cbb73e9c82dd7d1d34f3a96856c65077f7577",
+      "size": 2701
+    },
+    {
+      "path": "recursos/median-of-medians.png",
+      "sha": "fd2ed22ded3aebd8a168442e6d39c95a4d059835",
+      "size": 20488
+    },
+    {
+      "path": "recursos/morse.drawio",
+      "sha": "0cf728c913b3cbd13616ee9cf4cd3733150d1948",
+      "size": 3273
+    },
+    {
+      "path": "recursos/morse.gif",
+      "sha": "ffd909fbfdd545c5833c52a8b718e59c69b53e16",
+      "size": 5052
+    },
+    {
+      "path": "recursos/morse.png",
+      "sha": "5d5e8555c85c15dce70ea994d1d9f77702d83a0d",
+      "size": 41778
+    },
+    {
+      "path": "recursos/morse.svg",
+      "sha": "aff19f9909db18b5125e41b3cfa179c85c3c5de3",
+      "size": 48924
+    },
+    {
+      "path": "recursos/ord-insercion.png",
+      "sha": "33cf518dd7a8becae350495455aad01b5f8b7cb2",
+      "size": 16709
+    },
+    {
+      "path": "recursos/ord-seleccion.png",
+      "sha": "83c02cb2d3373b922d498b75c3e66416b43d4b9e",
+      "size": 11296
+    },
+    {
+      "path": "recursos/orden-2-3.png",
+      "sha": "c2573e5a10214006b7287baae12fb52a68d6b5e7",
+      "size": 9410
+    },
+    {
+      "path": "recursos/ordinal-binario.png",
+      "sha": "f822689f3bda0ea30647ca265183648967f25b63",
+      "size": 29153
+    },
+    {
+      "path": "recursos/ordinal-binario.txt",
+      "sha": "15b260b9a0e65357a57357ecb74acb4743e6f272",
+      "size": 431
+    },
+    {
+      "path": "recursos/ordinal.png",
+      "sha": "44d8680dba6183c9c2891beaafd08e5a6b56141b",
+      "size": 23137
+    },
+    {
+      "path": "recursos/ordinal.txt",
+      "sha": "998155931cfa766a94a2727413cf8ed1fe7af417",
+      "size": 115
+    },
+    {
+      "path": "recursos/particion-Hoare.drawio",
+      "sha": "6f1fcc131e3ebe4ee0b2cb2c5a3c66607e663997",
+      "size": 1067
+    },
+    {
+      "path": "recursos/particion-Hoare.png",
+      "sha": "1d6198331a0100034aa114df5e74ed0be93327fa",
+      "size": 2709
+    },
+    {
+      "path": "recursos/particion-Lomuto.drawio",
+      "sha": "1702402a310d6363694002d5f90af396391be074",
+      "size": 1067
+    },
+    {
+      "path": "recursos/particion-Lomuto.png",
+      "sha": "ef204035bb063a70c43c5b7f43f5d03125d3f47e",
+      "size": 2701
+    },
+    {
+      "path": "recursos/particion.gif",
+      "sha": "1fc2d75f8aaeef4821b393eaf8dbefa99ed8cf51",
+      "size": 771
+    },
+    {
+      "path": "recursos/pila-arreglo.lyx",
+      "sha": "d75be5b56e5c8084687011fb50c0a57bdf4bfc9a",
+      "size": 5601
+    },
+    {
+      "path": "recursos/pila-arreglo.png",
+      "sha": "9c2bb79a8c90e14bf3e7f15e1e9d37fe7c48a35f",
+      "size": 16253
+    },
+    {
+      "path": "recursos/pila-lista.lyx",
+      "sha": "d7f4dc4e4f8189bbe75a052f8508e552b60c43f8",
+      "size": 4710
+    },
+    {
+      "path": "recursos/pila-lista.png",
+      "sha": "40b7a655d9f0211bd61e14310c3f6e039986a8d2",
+      "size": 15730
+    },
+    {
+      "path": "recursos/pila.lyx",
+      "sha": "d96a814f2e1dabad00f713123eb40b8addddcf00",
+      "size": 3130
+    },
+    {
+      "path": "recursos/pila.png",
+      "sha": "8355ef6c3bc07dbb0e6609b05e0a24c049092c11",
+      "size": 8746
+    },
+    {
+      "path": "recursos/prefix-free.drawio",
+      "sha": "cdcf446baf3a08fb3ec94936f5a525ecb7ac8702",
+      "size": 2313
+    },
+    {
+      "path": "recursos/prefix-free.gif",
+      "sha": "14c7f19616963277e3fe0fe56f995a420d8470ae",
+      "size": 2103
+    },
+    {
+      "path": "recursos/prefix-free.png",
+      "sha": "f573169daa185674b03cc8f5280de1e31c2d9594",
+      "size": 32339
+    },
+    {
+      "path": "recursos/prefix-free.svg",
+      "sha": "9f6930f4de53d2dc001cc82004f3a63f0142f90e",
+      "size": 16401
+    },
+    {
+      "path": "recursos/prim-base.drawio",
+      "sha": "ff8d11882d57c936614d72d056a0ac8f5e3fed79",
+      "size": 1751
+    },
+    {
+      "path": "recursos/prim.gif",
+      "sha": "d89cba9181d7ca56eb575ab6be485e5ec8a69386",
+      "size": 107311
+    },
+    {
+      "path": "recursos/prim00.drawio",
+      "sha": "2913b57ac9b6b2a355c3767f8bc349ec88eb9035",
+      "size": 1751
+    },
+    {
+      "path": "recursos/prim00.png",
+      "sha": "d489e1dd79d58f5d1e743f7534e8eeaae5f7189f",
+      "size": 9607
+    },
+    {
+      "path": "recursos/prim01.drawio",
+      "sha": "3dad4bfcc764658a2dbb6e33d86c0a93ba6c1875",
+      "size": 1763
+    },
+    {
+      "path": "recursos/prim01.png",
+      "sha": "38c4437f18f75b853c2731161b14a23b4b262e2a",
+      "size": 9623
+    },
+    {
+      "path": "recursos/prim02.drawio",
+      "sha": "834b25df5b4598939d6f53d8ab33f25aaf466ea7",
+      "size": 1779
+    },
+    {
+      "path": "recursos/prim02.png",
+      "sha": "8d9d00b1d14a8110390fbdfcf5038339ee016fc4",
+      "size": 9793
+    },
+    {
+      "path": "recursos/prim03.drawio",
+      "sha": "3fcd00c89209e1c9b78d954c72871ad07983089a",
+      "size": 1763
+    },
+    {
+      "path": "recursos/prim03.png",
+      "sha": "1b3b1a93063429106d1529146b6dcaab90242697",
+      "size": 9711
+    },
+    {
+      "path": "recursos/prim04.drawio",
+      "sha": "aecfdd90cf561d989a082dd398a403253a925256",
+      "size": 1779
+    },
+    {
+      "path": "recursos/prim04.png",
+      "sha": "b3182ee08b1c4a86ec3eb2660bd2963010abb61f",
+      "size": 9885
+    },
+    {
+      "path": "recursos/prim05.drawio",
+      "sha": "14a33ca94d67a0374f8538df7d87b0de7bbed6c0",
+      "size": 1759
+    },
+    {
+      "path": "recursos/prim05.png",
+      "sha": "f1bd84c54abc4e4c68608db3d09be5fecc4b917e",
+      "size": 9725
+    },
+    {
+      "path": "recursos/prim06.drawio",
+      "sha": "65bf598730687cff554b2874cdb2b2efad57268c",
+      "size": 1771
+    },
+    {
+      "path": "recursos/prim06.png",
+      "sha": "6904db9f1664f17d3bf929339ffd1cd4c55969b6",
+      "size": 9647
+    },
+    {
+      "path": "recursos/prim07.drawio",
+      "sha": "45e0861c3663e5bf019e0740bb5ac92d720f7d94",
+      "size": 1767
+    },
+    {
+      "path": "recursos/prim07.png",
+      "sha": "afb59ac6d7a3af6798ac2976c0a1d0fe300d837e",
+      "size": 9745
+    },
+    {
+      "path": "recursos/prim08.drawio",
+      "sha": "33e72f2de68e7ac6b7deb6c478d76e7f6e77cbd2",
+      "size": 1775
+    },
+    {
+      "path": "recursos/prim08.png",
+      "sha": "6b708ec58a60971abfc1251799a931692f536231",
+      "size": 9865
+    },
+    {
+      "path": "recursos/prim09.drawio",
+      "sha": "7f00d7ae67992ba6586bf4af086c48d4735633a7",
+      "size": 1767
+    },
+    {
+      "path": "recursos/prim09.png",
+      "sha": "46f848c8885d427c581e60ab86a3d6b3745b581b",
+      "size": 9691
+    },
+    {
+      "path": "recursos/prim10.drawio",
+      "sha": "b536a6636540e3be8fa1431e659929dbf2d1d9a0",
+      "size": 1775
+    },
+    {
+      "path": "recursos/prim10.png",
+      "sha": "e9b2635106e0e0da9e2f5542e38732096229b270",
+      "size": 9625
+    },
+    {
+      "path": "recursos/prim11.drawio",
+      "sha": "4874d0bb92fac996ebe18c498c5e3a3c97b9450b",
+      "size": 1767
+    },
+    {
+      "path": "recursos/prim11.png",
+      "sha": "652ad7935f70d21bca1225ba251c544d14353e69",
+      "size": 9330
+    },
+    {
+      "path": "recursos/prim12.drawio",
+      "sha": "1e379bbf7c8fb80443155383ab3cf49b204cafa9",
+      "size": 1783
+    },
+    {
+      "path": "recursos/prim12.png",
+      "sha": "2f5848cb68e76e82413feb876ff79f317c3b4156",
+      "size": 9792
+    },
+    {
+      "path": "recursos/prim13.drawio",
+      "sha": "ff2a5455d1508f56c0951d6b38494130273fa011",
+      "size": 1767
+    },
+    {
+      "path": "recursos/prim13.png",
+      "sha": "76bd7576093045c5c93c34064be99c32075e23ac",
+      "size": 9359
+    },
+    {
+      "path": "recursos/prim14.drawio",
+      "sha": "cca612cc3560974bb50e4d1dad13336d6be051bd",
+      "size": 1779
+    },
+    {
+      "path": "recursos/prim14.png",
+      "sha": "5b34815d24d08ec1971da451d25dc48506461e9a",
+      "size": 9714
+    },
+    {
+      "path": "recursos/prim15.drawio",
+      "sha": "5127e0c26d6f4f9e0599cb4f14792e1bf7b9aed8",
+      "size": 1767
+    },
+    {
+      "path": "recursos/prim15.png",
+      "sha": "c9ce3dce3a3d373509546484fe45a611aa75945d",
+      "size": 9371
+    },
+    {
+      "path": "recursos/rotacion-simple.lyx",
+      "sha": "935feead919dc273a014085b0340852d97ec0393",
+      "size": 4800
+    },
+    {
+      "path": "recursos/rotacion-simple.png",
+      "sha": "2bbd3eef8ce49ecfa63a244de2af096c7e6fd54e",
+      "size": 17193
+    },
+    {
+      "path": "recursos/seleccion.lyx",
+      "sha": "badddcac2352ce3caeb4375a0b2dc26ae795275b",
+      "size": 4540
+    },
+    {
+      "path": "recursos/seleccion.png",
+      "sha": "f4b60c64fc302b4375febffe75e19a47bc166b1d",
+      "size": 9642
+    },
+    {
+      "path": "recursos/skip-list1.drawio",
+      "sha": "e2a72f689334919d509f7da1809fbf54f502c7d1",
+      "size": 1949
+    },
+    {
+      "path": "recursos/skip-list1.png",
+      "sha": "a8b3612dd579bc43ddcf69f37f7b5f31e377c8b6",
+      "size": 8137
+    },
+    {
+      "path": "recursos/skip-list2.drawio",
+      "sha": "3fea5299151b1444a7f64de5f1923878460f657d",
+      "size": 2141
+    },
+    {
+      "path": "recursos/skip-list2.png",
+      "sha": "dc629a931691f13dd01b1c05d705cabe9941c471",
+      "size": 9896
+    },
+    {
+      "path": "recursos/skip-list3.drawio",
+      "sha": "676a0bf6797e1d2c5d91cf32b5f3fc0d8ea5e1d9",
+      "size": 2229
+    },
+    {
+      "path": "recursos/skip-list3.png",
+      "sha": "799cba86f1176e8247ce5d70dfaf30e4dd220b0c",
+      "size": 11206
+    },
+    {
+      "path": "recursos/skip-list4.drawio",
+      "sha": "b7b85b8ccce6a90ac0fdbe1bd4f65fa3ea1dc85d",
+      "size": 2285
+    },
+    {
+      "path": "recursos/skip-list4.png",
+      "sha": "00b0a97b44753c5122938c2c40f8be2f5f972242",
+      "size": 7723
+    },
+    {
+      "path": "recursos/skip-search.drawio",
+      "sha": "b7b85b8ccce6a90ac0fdbe1bd4f65fa3ea1dc85d",
+      "size": 2285
+    },
+    {
+      "path": "recursos/skip-search.gif",
+      "sha": "56549595e866efe407c2c280c2fc9dcc6b3382cd",
+      "size": 108617
+    },
+    {
+      "path": "recursos/spider.drawio",
+      "sha": "555df2a31154dd24a76fe8aada46a01504f7c5a1",
+      "size": 1077
+    },
+    {
+      "path": "recursos/spider.png",
+      "sha": "408c602844fb190e453c5edf2a8c7212a2e149f3",
+      "size": 2735
+    },
+    {
+      "path": "recursos/splay1.png",
+      "sha": "cd58bb9d0c0721862411937e72c0eaabe7c3ee54",
+      "size": 4694
+    },
+    {
+      "path": "recursos/splay2.png",
+      "sha": "5a35d60f113e56df9367f10eadbdb6178571be9b",
+      "size": 5073
+    },
+    {
+      "path": "recursos/ss1.drawio",
+      "sha": "a739787a0b715a0ab2f4541e674c67d16060d813",
+      "size": 2661
+    },
+    {
+      "path": "recursos/ss1.png",
+      "sha": "8dff583ea2c98bf0420e3f5f8f13aea801def8d6",
+      "size": 18063
+    },
+    {
+      "path": "recursos/ss10.drawio",
+      "sha": "e2b57dd0bcbf9227af57eb3a97c936fe18fc97e4",
+      "size": 2877
+    },
+    {
+      "path": "recursos/ss10.png",
+      "sha": "d1a6be5b90f59bd9ed364505bda3653a25036619",
+      "size": 19430
+    },
+    {
+      "path": "recursos/ss11.drawio",
+      "sha": "16bb09a8f7f15a64b758d3fc5d997e4b838b1232",
+      "size": 2853
+    },
+    {
+      "path": "recursos/ss11.png",
+      "sha": "5dd3c9e8cd7404ebf7a8bf1c79f05cae9316fe20",
+      "size": 19513
+    },
+    {
+      "path": "recursos/ss2.drawio",
+      "sha": "125472785a31ac26744ead096fd075dedc4e666b",
+      "size": 2857
+    },
+    {
+      "path": "recursos/ss2.png",
+      "sha": "65eccb8ac1e4748f6233b13a5155455647760932",
+      "size": 19207
+    },
+    {
+      "path": "recursos/ss3.drawio",
+      "sha": "18a858c56160955dc910ba7534c64ac45c410e81",
+      "size": 2661
+    },
+    {
+      "path": "recursos/ss3.png",
+      "sha": "04d9a16fdeab35f884769068600b0fcd40e56ddf",
+      "size": 18215
+    },
+    {
+      "path": "recursos/ss4.drawio",
+      "sha": "84a465e2b055b3b59f3f8bff47dfb93278c5c204",
+      "size": 2837
+    },
+    {
+      "path": "recursos/ss4.png",
+      "sha": "c9c8fa8853bf0c0dec4a474c97143f1db2d63077",
+      "size": 19373
+    },
+    {
+      "path": "recursos/ss5.drawio",
+      "sha": "5fa8fb3b4ae97af34cebe8b3dd735ed1d6971866",
+      "size": 2661
+    },
+    {
+      "path": "recursos/ss5.png",
+      "sha": "a467a73f059e8c2e0649c8505c64bb87784ae012",
+      "size": 18171
+    },
+    {
+      "path": "recursos/ss6.drawio",
+      "sha": "d2a233196caf5bd30da086d17296a61499bf946a",
+      "size": 2877
+    },
+    {
+      "path": "recursos/ss6.png",
+      "sha": "dc439d081d213f84e20c6ce3b2406d40c34c4546",
+      "size": 19461
+    },
+    {
+      "path": "recursos/ss7.drawio",
+      "sha": "d313335e709404f34e54992ff2f062f0b9e28186",
+      "size": 2661
+    },
+    {
+      "path": "recursos/ss7.png",
+      "sha": "9cfad3b7e7a3f970b8787bd50690592137a0510b",
+      "size": 18140
+    },
+    {
+      "path": "recursos/ss8.drawio",
+      "sha": "2105bae5b87f3656c508072d6d0234b1f6450e46",
+      "size": 2841
+    },
+    {
+      "path": "recursos/ss8.png",
+      "sha": "63cb1f2a5abc78cfee7a985c6011bfcd3073ae80",
+      "size": 19259
+    },
+    {
+      "path": "recursos/ss9.drawio",
+      "sha": "95997db02b903eefa573d972209e0e32a02b4ef1",
+      "size": 2661
+    },
+    {
+      "path": "recursos/ss9.png",
+      "sha": "fb8c74fa520ed6894376dc2e885e73390ff9fe56",
+      "size": 18139
+    },
+    {
+      "path": "recursos/state-diagram-1.png",
+      "sha": "435f3db7ff59ff6abec01d560f98c7d31724c2c1",
+      "size": 11890
+    },
+    {
+      "path": "recursos/state-diagram-1.txt",
+      "sha": "808eef86c9c65cc9f7be480b1254d105712e9401",
+      "size": 218
+    },
+    {
+      "path": "recursos/state-diagram-2.png",
+      "sha": "1718ad3fda11199d7145453dafcf9b11abde0f0a",
+      "size": 36737
+    },
+    {
+      "path": "recursos/state-diagram-2.txt",
+      "sha": "70b77c630821b1bc220db90cc3c3d9f5df0304e2",
+      "size": 502
+    },
+    {
+      "path": "recursos/t4_1.png",
+      "sha": "474b53b3dcac7ba66ee17e5870d231c1f3c0d9b0",
+      "size": 8332
+    },
+    {
+      "path": "recursos/t4_2.png",
+      "sha": "59e1083cafb411d8cf6bc18e73a8ca37bfa09c1a",
+      "size": 8250
+    },
+    {
+      "path": "recursos/t4_3.png",
+      "sha": "a054056c893eb2864dac98ed2320c12174452c91",
+      "size": 8108
+    },
+    {
+      "path": "recursos/t4_4.png",
+      "sha": "7302ff7ad67738637e4379cb37e693b51d308009",
+      "size": 8342
+    },
+    {
+      "path": "recursos/trie.drawio",
+      "sha": "dfa0a1c8d24cd99fd997a6d39e8b3e4f61568801",
+      "size": 1940
+    },
+    {
+      "path": "recursos/trie.png",
+      "sha": "f86f5bc99fb111345d2e37ce9fe765db3962fec5",
+      "size": 17108
+    },
+    {
+      "path": "recursos/warshall.drawio",
+      "sha": "48ee1bb3fe4a1751d57951bc07d89e9015660d86",
+      "size": 2395
+    },
+    {
+      "path": "recursos/warshall.png",
+      "sha": "3e7ece6b3183d894ca67f70ca9c8205c029a53a5",
+      "size": 25478
+    }
+  ]
+}

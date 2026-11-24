@@ -21,9 +21,12 @@ onmessage=async e=>{const m=e.data;
  let ok=true;
  try{await ready;count=0;decoder=new TextDecoder();if(m.type==='script')reset();
  // Standard library is bundled; supported external packages can be loaded on demand.
- await py.loadPackagesFromImports(m.code);
- const result=await py.runPythonAsync(m.code,{globals:ns,filename:m.type==='script'?(m.filename||'programa.py'):'<console>'});
+ let executable=m.code;
+ if(m.type==='cell'){const lines=executable.split('\n');const kept=[];for(const line of lines){if(/^!pip install (?:--upgrade )?aed[-_]utilities\s*$/.test(line.trim())){await py.loadPackage('micropip');await py.runPythonAsync("import micropip\nawait micropip.install('aed-utilities')");send('out','aed-utilities instalado\n');continue}if(/^%matplotlib inline\s*$/.test(line.trim())){await py.loadPackage('matplotlib');await py.runPythonAsync("import matplotlib\nmatplotlib.use('Agg')");continue}if(/^%pylab inline\s*$/.test(line.trim())){await py.loadPackage(['numpy','matplotlib']);kept.push("import matplotlib\nmatplotlib.use('Agg')\nfrom numpy import *\nfrom matplotlib.pyplot import *\nimport numpy as np\nimport matplotlib.pyplot as plt");continue}kept.push(line)}executable=kept.join('\n')}
+ await py.loadPackagesFromImports(executable);
+ const result=await py.runPythonAsync(executable,{globals:ns,filename:m.type==='script'?(m.filename||'programa.py'):'<console>'});
  if((m.type==='repl'||m.type==='cell')&&result!==undefined){if(result===null){}else if(typeof result==='object'&&typeof result.destroy==='function'){ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}else{ns.set('__duopy_result__',result);try{py.runPython('print(repr(__duopy_result__))',{globals:ns})}finally{ns.delete('__duopy_result__')}}}
  if(result&&typeof result.destroy==='function')result.destroy();
+ if(m.type==='cell'){try{const figs=JSON.parse(py.runPython("import sys as _s, json as _j, io as _io, base64 as _b\n_duo_imgs=[]\nif 'matplotlib.pyplot' in _s.modules:\n    _p=_s.modules['matplotlib.pyplot']\n    for _n in _p.get_fignums()[:8]:\n        _buf=_io.BytesIO()\n        _p.figure(_n).savefig(_buf,format='png',dpi=110,bbox_inches='tight')\n        _duo_imgs.append(_b.b64encode(_buf.getvalue()).decode('ascii'))\n    _p.close('all')\n_j.dumps(_duo_imgs)"));for(const data of figs){if(data.length<8000000)postMessage({type:'image',data})}}catch(e){send('out','[Gráfico no disponible: '+String(e)+']\n')}}
  }catch(err){ok=false;send('out',String(err)+'\n')}finally{const rest=decoder.decode();if(rest)send('out',rest);reportMeta();postMessage({type:'done',ok})}
 };

@@ -1,4 +1,4 @@
-# DuoPy β 0.5
+# DuoPy β 0.6
 
 Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.github.io/duopy/beta/ si GitHub Pages publica main desde la raíz.
 
@@ -31,3 +31,6 @@ Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.g
 - ⧉ copia selección de texto o código de la celda al portapapeles interno (PST en EDIT) y, cuando el navegador lo permita, al portapapeles del sistema. No se escriben notebooks originales. Touchpad y flechas para navegar.
 - Markdown básico, texto de salida y PNG/JPEG guardados; no HTML activo, widgets, LaTeX renderizado ni gráficos nuevos inline. No es JupyterLab ni IPython completo. input() usa un campo nativo opcional y requiere aislamiento como en la consola. El estado del notebook vive en memoria de la pestaña, no sobrevive a recargar.
 - Abrir una celda no ejecuta código automáticamente. Ejecutar solo notebooks de confianza.
+
+## AED oficial
+El catálogo completo de 314 archivos está en beta/notebooks/aed-index.json, fijado al commit 7d8ef60e45a1923f855b5777b60696b074a7a445 de https://github.com/ivansipiran/AED-Apuntes. Se accede directamente a los originales de GitHub: no hay copia redistribuida ni modificación del contenido. Los notebooks se verifican por tamaño y SHA-1 de blob cuando Web Crypto está disponible. En NB se incluyen 10 capítulos, 7 guías, índice, README, recursos y checkpoints. Los enlaces de recursos apuntan a la misma revisión. Markdown, fórmulas KaTeX, imágenes y GIF originales se visualizan en el visor con conexión; si no cargan las dependencias CDN se usa Markdown básico. Para ejecutar se mantienen las celdas originales; el worker adapta en memoria las directivas %matplotlib inline, %pylab inline y las instalaciones de aed-utilities, e intenta capturar gráficos matplotlib. No se garantiza compatibilidad con aed-utilities, IPython, widgets o todos los notebooks: abrir el original desde ↗ permite usar Jupyter/Colab. El repo upstream no declara licencia de redistribución. No se almacenan copias de sus archivos.
