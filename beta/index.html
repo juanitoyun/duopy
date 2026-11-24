@@ -26,27 +26,65 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 .clicks{display:flex;gap:4px;flex:0 0 clamp(24px,9dvh,42px)}.clicks button{flex:1;background:linear-gradient(#b3c7df,#849cb9);font-size:clamp(10px,3dvh,15px)}
 .joywrap{flex:1;min-height:0;display:grid;place-items:center}.joy{width:100%;max-width:120px;max-height:100%;aspect-ratio:1;display:grid;grid-template:repeat(3,minmax(0,1fr))/repeat(3,minmax(0,1fr));gap:2px;background:#162334;border:2px solid #8ca2b9;border-radius:50%;padding:6%;overflow:hidden}.joy button{border-radius:7px;background:#3c526d;color:#dbe8f8;border:0;box-shadow:none;font-size:clamp(11px,4dvh,22px)}.joy .center{border-radius:50%;background:radial-gradient(circle at 35% 25%,#7c93ac,#30445c 65%,#1d2b3c);border:1px solid #9cb0c7}.joy .up{grid-area:1/2}.joy .left{grid-area:2/1}.joy .center{grid-area:2/2}.joy .right{grid-area:2/3}.joy .down{grid-area:3/2}
 @media(orientation:portrait){.deck{grid-template-columns:32px minmax(0,1fr) 58px;grid-template-rows:auto auto minmax(0,1fr);--lh:18px;--font:12px}.keys{gap:4px;padding:3px}.keyrow{gap:2px}.keyrow button{font-size:11px}.joywrap{align-items:start}.switch{flex-basis:75px}}
+
+/* beta 0.2 — physical-style controls */
+.deck{position:relative;grid-template-columns:clamp(64px,11vw,105px) minmax(0,1fr) clamp(94px,15vw,155px)}
+.side{position:relative;display:flex;justify-content:space-between;align-items:center;gap:4px;padding:3px 0}
+.side button{flex:none}
+.dpad{display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);width:min(100%,92px);aspect-ratio:1;gap:0;filter:drop-shadow(0 2px 1px #0d1725)}
+.dpad button{height:100%;width:100%;border:0;border-radius:0;box-shadow:none;background:linear-gradient(#536c89,#2a4059);color:#dceafa;font-size:clamp(10px,3.1dvh,16px)}
+.dpad .north{grid-area:1/2;border-radius:6px 6px 0 0}.dpad .west{grid-area:2/1;border-radius:6px 0 0 6px}.dpad .south{grid-area:3/2;border-radius:0 0 6px 6px}.dpad .east{grid-area:2/3;border-radius:0 6px 6px 0}.dpad .hub{grid-area:2/2;background:#3b526d}
+.dpad button:active{background:#91bbeb;transform:none;color:#152436}
+#flower{width:clamp(33px,8dvh,53px);aspect-ratio:1;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 25%,#7896b6,#304862 70%);font-size:clamp(19px,5dvh,29px);border:2px solid #9eb8d1;z-index:9;transition:transform .18s}
+#flower[aria-expanded=true]{transform:rotate(45deg);background:#a0c5e9;color:#152436}
+.flower-menu{position:absolute;left:50%;bottom:0;z-index:8;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .15s}
+.flower-menu.open{opacity:1;pointer-events:auto}
+.flower-menu button{position:absolute;width:clamp(38px,10dvh,54px);height:clamp(38px,10dvh,54px);border-radius:50%;font-size:clamp(9px,2.8dvh,13px);background:linear-gradient(#e3ebf8,#a3b9d3);color:#172438;box-shadow:0 3px 8px #071321b0;transform:translate(-50%,-50%) scale(.2);transition:transform .18s cubic-bezier(.2,.8,.2,1.15);white-space:nowrap}
+.flower-menu.open button{transform:translate(-50%,-50%) scale(1)}
+.flower-menu button[hidden]{display:none}
+.menu-shade{position:absolute;inset:0;background:#06101d65;border:0;box-shadow:none;border-radius:10px;z-index:7;touch-action:manipulation}
+.menu-shade[hidden]{display:none}
+.side.menu-open{z-index:9}
+.controls{gap:5px}
+.clicks button{font-size:clamp(12px,3.7dvh,19px)}
+.joywrap{grid-template-columns:minmax(0,1fr) clamp(18px,3.3vw,27px);gap:5px;align-items:center}
+.joy{position:relative;display:block;width:100%;max-width:112px;max-height:none;aspect-ratio:1;padding:0;touch-action:none;user-select:none;overflow:visible;background:radial-gradient(circle,#253a51 0 47%,#142335 49% 70%,#46617d 71%);border:2px solid #8ca2b9;box-shadow:inset 0 3px 8px #0a1422}
+.stick{position:absolute;left:50%;top:50%;width:53%;height:53%;border-radius:50%;background:radial-gradient(circle at 35% 22%,#9cb2ca,#475f7b 48%,#23364c 76%);border:1px solid #a4b7cb;box-shadow:0 4px 7px #09111fbb;transform:translate(-50%,-50%);pointer-events:none}
+.wheel{height:clamp(58px,27dvh,112px);width:100%;border:2px solid #8299b3;border-radius:10px;background:#111f30;overflow:hidden;touch-action:none;cursor:ns-resize;box-shadow:inset 0 2px 5px #0008;position:relative}
+.wheel-tread{position:absolute;inset:3px 2px;background:repeating-linear-gradient(to bottom,#8299b1 0px,#8299b1 2px,#30465f 3px,#30465f 8px);border-radius:6px;box-shadow:inset 4px 0 5px #0a162488,inset -4px 0 5px #0a162488;pointer-events:none}
+.wheel:after{content:'';position:absolute;inset:0;background:linear-gradient(#101b2990,transparent 30%,transparent 70%,#101b2990);pointer-events:none}
+.mouse-pointer{position:absolute;left:0;top:0;width:13px;height:19px;z-index:5;pointer-events:none;filter:drop-shadow(0 1px 2px #000a);will-change:transform}
+.mouse-pointer svg{display:block;width:100%;height:100%}.mouse-pointer path{fill:#fff;stroke:#162538;stroke-width:1.15;stroke-linejoin:round}
+@media(orientation:portrait){.deck{grid-template-columns:48px minmax(0,1fr) 72px}.joywrap{grid-template-columns:minmax(0,1fr) 16px;gap:2px;align-items:center}.dpad{width:46px}.wheel{height:65px}.side{justify-content:flex-start;gap:20px}}
 </style>
 </head>
 <body>
 <main class="deck" id="deck" data-mode="edit">
 <section class="screen console" id="consoleScreen" aria-label="Consola"><div class="glyph">&gt;_</div><div class="viewport" id="consoleView" tabindex="0"><pre id="output"></pre></div></section>
 <section class="screen editor active" id="editorScreen" aria-label="Editor"><div class="glyph">.py</div><div class="viewport" id="editorView" tabindex="0"><pre id="code"></pre></div></section>
-<aside class="side" aria-label="Archivos">
-<button id="open" title="Abrir .py" aria-label="Abrir archivo">↥</button>
-<button id="save" title="Guardar .py" aria-label="Guardar archivo">↓</button>
-<button id="new" title="Nuevo script" aria-label="Nuevo script">＋</button>
+<aside class="side" id="side" aria-label="Controles">
+<div class="dpad" id="dpad" aria-label="Cruceta">
+<button class="north" data-move="up" aria-label="Arriba">▴</button><button class="west" data-move="left" aria-label="Izquierda">◂</button><span class="hub"></span><button class="east" data-move="right" aria-label="Derecha">▸</button><button class="south" data-move="down" aria-label="Abajo">▾</button>
+</div>
+<button id="flower" aria-label="Menú" aria-expanded="false" aria-controls="flowerMenu">✳</button>
+<div id="flowerMenu" class="flower-menu" role="group" aria-label="Menú radial" inert>
+<button id="open" title="Abrir .py" aria-label="Abrir archivo">OPEN</button>
+<button id="save" title="Guardar .py" aria-label="Guardar archivo">SAVE</button>
+<button id="new" title="Nuevo script" aria-label="Nuevo script">NEW</button>
 <button id="undo" title="Deshacer" aria-label="Deshacer">↶</button>
+<button id="select" title="Seleccionar / interrumpir" aria-label="Seleccionar">SEL</button>
+<button id="copy" title="Copiar / pegar" aria-label="Copiar o pegar">PST</button>
+</div>
 <input type="file" id="file" accept=".py,.txt,text/plain" hidden>
 </aside>
 <section class="keys" id="keyboard" aria-label="Teclado"></section>
 <aside class="controls" aria-label="Controles">
 <button class="switch" id="switch" role="switch" aria-checked="false" aria-label="EDIT / RUN"><span class="track"><span class="knob"></span></span><span class="modewords"><b>EDIT</b><b>RUN</b></span></button>
-<div class="clicks"><button id="select" title="Seleccionar / interrumpir" aria-label="Seleccionar">SEL</button><button id="copy" title="Copiar / pegar" aria-label="Copiar o pegar">CPY</button></div>
-<div class="joywrap"><div class="joy" aria-label="Joystick">
-<button class="up" data-move="up" aria-label="Arriba">▲</button><button class="left" data-move="left" aria-label="Izquierda">◀</button><button class="center" id="center" aria-label="Confirmar"></button><button class="right" data-move="right" aria-label="Derecha">▶</button><button class="down" data-move="down" aria-label="Abajo">▼</button>
-</div></div>
+<div class="clicks"><button id="leftClick" title="Clic izquierdo" aria-label="Clic izquierdo">L</button><button id="rightClick" title="Clic derecho" aria-label="Clic derecho">R</button></div>
+<div class="joywrap"><div class="joy" id="analog" role="group" aria-label="Joystick de puntero"><span class="stick" id="stick"></span></div><div class="wheel" id="wheel" role="group" aria-label="Rueda de desplazamiento vertical"><span class="wheel-tread" id="tread"></span></div></div>
 </aside>
+<button class="menu-shade" id="menuShade" aria-label="Cerrar menú" hidden></button>
+<div class="mouse-pointer" id="mousePointer" aria-hidden="true"><svg viewBox="0 0 13 19"><path d="M1 1 L1 16 L4.7 12.4 L8 18 L10.3 16.6 L7.1 11 L12 10.7 Z"/></svg></div>
 </main>
 <script>
 'use strict';
@@ -63,18 +101,18 @@ function renderEditor(follow=true){
  const frag=document.createDocumentFragment();let offset=0, caret=null;
  const lo=anchor===null?pos:Math.min(anchor,pos),hi=anchor===null?pos:Math.max(anchor,pos);
  script.split('\n').forEach((line,i)=>{
-  const row=document.createElement('span');row.className='line';row.append(span(String(i+1),'num'));
+  const row=document.createElement('span');row.className='line';row.dataset.start=offset;row.dataset.length=line.length;row.append(span(String(i+1),'num'));
   const ranges=[...line.matchAll(tokens)].map(m=>[m.index,m.index+m[0].length,tokenClass(m[0])]);
   const cuts=new Set([0,line.length]);ranges.forEach(r=>{cuts.add(r[0]);cuts.add(r[1])});
   for(const v of [pos,lo,hi])if(v>=offset&&v<=offset+line.length)cuts.add(v-offset);
   const points=[...cuts].sort((a,b)=>a-b);
-  for(let j=0;j<points.length;j++){const a=points[j],b=points[j+1];if(mode==='edit'&&offset+a===pos){caret=span('','cursor');row.append(caret)}if(b===undefined)break;const r=ranges.find(t=>a>=t[0]&&a<t[1]);row.append(span(line.slice(a,b),(r?r[2]:'')+(offset+a>=lo&&offset+a<hi?' selected':'')))}
+  for(let j=0;j<points.length;j++){const a=points[j],b=points[j+1];if(mode==='edit'&&offset+a===pos){caret=span('','cursor');row.append(caret)}if(b===undefined)break;const r=ranges.find(t=>a>=t[0]&&a<t[1]);const part=span(line.slice(a,b),(r?r[2]:'')+(offset+a>=lo&&offset+a<hi?' selected':''));part.dataset.offset=offset+a;row.append(part)}
   frag.append(row);offset+=line.length+1;
  });code.replaceChildren(frag);if(follow&&caret)caret.scrollIntoView({block:'nearest',inline:'nearest'});persist()
 }
 function renderConsole(follow=true){
  out.replaceChildren(document.createTextNode(transcript));
- if(mode==='run'&&(!busy||waiting)){const prompt=waiting?'':'>>> ';out.append(document.createTextNode(prompt+command.slice(0,cp)),span('','cursor'),document.createTextNode(command.slice(cp)))}
+ if(mode==='run'&&(!busy||waiting)){const prompt=waiting?'':'>>> ';const before=span(command.slice(0,cp));before.dataset.command='0';const after=span(command.slice(cp));after.dataset.command=String(cp);out.append(document.createTextNode(prompt),before,span('','cursor'),after)}
  else if(!transcript)out.append(document.createTextNode('>>> '));
  if(follow)cv.scrollTop=cv.scrollHeight;
 }
@@ -110,7 +148,7 @@ function keyboard(){
   chars(letters).concat(key('TAB','tab',1.3,'aux')),
   chars(mid).concat(key('↵','enter',1.7,'enter')),
   [key('⇧','shift',1.2,'aux'),...chars(low),key(layer==='abc'?'SYM':'ABC','layer',1.5,'fn')],
-  [key('def','def ',1,'fn'),key('if','if ',1,'fn'),key('for','for ',1,'fn'),key('',' ',4.3,'space'),key('=','=',1),key('←','left',1,'aux'),key('→','right',1,'aux')]
+  [key('def','def ',1,'fn'),key('if','if ',1,'fn'),key('for','for ',1,'fn'),key('',' ',4.3,'space'),key('=','=',1),key('+','+',1),key('-','-',1)]
  ];
  const fragment=document.createDocumentFragment();for(const row of rows){const r=document.createElement('div');r.className='keyrow';for(const k of row){const b=document.createElement('button');b.type='button';b.textContent=k.label;b.className=k.cls;b.style.setProperty('--w',k.w);b.dataset.key=k.value;b.setAttribute('aria-label',k.value===' '?'Espacio':k.label);if(k.value==='shift')b.classList.toggle('on',shift);r.append(b)}fragment.append(r)}$('keyboard').replaceChildren(fragment)
 }
@@ -119,8 +157,8 @@ $('keyboard').addEventListener('click',e=>{const b=e.target.closest('button[data
 let repeatDelay,repeatTimer;
 function clearRepeat(){clearTimeout(repeatDelay);clearInterval(repeatTimer)}
 function repeatable(root,selector,fn){root.addEventListener('pointerdown',e=>{const b=e.target.closest(selector);if(!b)return;clearRepeat();repeatDelay=setTimeout(()=>{fn(b);repeatTimer=setInterval(()=>fn(b),85)},360)});}
-repeatable($('keyboard'),'button[data-key="back"]',()=>backspace());repeatable(document.querySelector('.joy'),'button[data-move]',b=>move(b.dataset.move));['pointerup','pointercancel','blur'].forEach(n=>window.addEventListener(n,clearRepeat));
-document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>move(b.dataset.move));$('center').onclick=enter;$('select').onclick=selection;$('copy').onclick=copyPaste;
+repeatable($('keyboard'),'button[data-key="back"]',()=>backspace());repeatable($('dpad'),'button[data-move]',b=>move(b.dataset.move));['pointerup','pointercancel','blur'].forEach(n=>window.addEventListener(n,clearRepeat));
+document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>move(b.dataset.move));$('select').onclick=selection;$('copy').onclick=copyPaste;
 $('undo').onclick=()=>{if(mode==='edit'&&undo.length){[script,pos]=undo.pop();anchor=null;renderEditor();syncClicks()}};
 $('new').onclick=()=>{if(mode==='edit'&&(!script||confirm('¿Nuevo script?'))){snapshot();script='';pos=0;anchor=null;filename='programa.py';renderEditor();syncClicks()}};
 $('open').onclick=()=>$('file').click();$('file').onchange=async()=>{const f=$('file').files[0];if(f&&mode==='edit'){try{const s=await f.text();if(mode!=='edit')return;snapshot();script=s;filename=f.name;pos=0;anchor=null;renderEditor();syncClicks()}catch(e){append(String(e)+'\n')}}$('file').value=''};
@@ -137,11 +175,49 @@ function startWorker(){if(worker)return;const id=++generation;loaded=false;chann
 function execute(kind,text){if(busy)return;busy=true;waiting=false;command='';cp=0;renderConsole();try{startWorker();const p={type:kind,code:text};if(loaded)worker.postMessage(p);else{pending=p;append('… Python\n')}}catch(e){append(String(e)+'\n');stop(false)}}
 function stop(note){if(worker){worker.terminate();worker=null;generation++}if(note&&busy)append('\nKeyboardInterrupt\n');busy=false;waiting=false;loaded=false;pending=null;channel=null;command='';cp=0;renderConsole();syncClicks()}
 function toggle(){if(mode==='edit'){mode='run';anchor=null;transcript='';deck.dataset.mode=mode;execute('script',script)}else{if(busy)stop(true);mode='edit';deck.dataset.mode=mode} $('switch').setAttribute('aria-checked',String(mode==='run'));$('consoleScreen').classList.toggle('active',mode==='run');$('editorScreen').classList.toggle('active',mode==='edit');renderEditor();renderConsole();syncClicks()}
-$('switch').onclick=toggle;
-document.addEventListener('keydown',e=>{if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='F5'){e.preventDefault();toggle();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
+$('switch').onclick=()=>{closeMenu();toggle();paintPointer()};
+document.addEventListener('keydown',e=>{if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='Escape'&&menuOpen){e.preventDefault();closeMenu();return}if(e.key==='F5'){e.preventDefault();closeMenu();toggle();paintPointer();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
  if(e.key.startsWith('Arrow')){e.preventDefault();move(e.key.slice(5).toLowerCase())}else if(e.key==='Enter'){e.preventDefault();enter()}else if(e.key==='Backspace'){e.preventDefault();backspace()}else if(e.key==='Tab'&&e.target.tagName!=='BUTTON'){e.preventDefault();insert('    ')}else if(e.key.length===1&&!e.altKey){e.preventDefault();insert(e.key)}});
 document.addEventListener('paste',e=>{if(e.target.tagName==='INPUT')return;const s=e.clipboardData?.getData('text/plain');if(s!==undefined){e.preventDefault();insert(s)}});
-keyboard();renderEditor();renderConsole();syncClicks();
+
+// Cursor del ratón independiente del caret de texto. Cada pantalla recuerda su posición.
+const pointer=$('mousePointer'), analog=$('analog'), stick=$('stick'), wheel=$('wheel'), tread=$('tread');
+const places={edit:{x:.12,y:.45},run:{x:.12,y:.45}};
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+function activeView(){return mode==='edit'?ev:cv}
+function pointerXY(){const r=activeView().getBoundingClientRect(),p=places[mode];return {x:r.left+p.x*Math.max(1,r.width-13),y:r.top+p.y*Math.max(1,r.height-19)}}
+function paintPointer(){const p=pointerXY(),r=deck.getBoundingClientRect();pointer.style.transform='translate('+ (p.x-r.left-deck.clientLeft)+'px,'+(p.y-r.top-deck.clientTop)+'px)'}
+let joyId=null,jx=0,jy=0,joyFrame=0,joyLast=0;
+function joyVector(e){const r=analog.getBoundingClientRect(),radius=Math.max(1,r.width*.32);let x=(e.clientX-r.left-r.width/2)/radius,y=(e.clientY-r.top-r.height/2)/radius;const m=Math.hypot(x,y);if(m>1){x/=m;y/=m}jx=x;jy=y;stick.style.transform='translate(-50%,-50%) translate('+(x*radius)+'px,'+(y*radius)+'px)'}
+function joyTick(t){if(joyId===null)return;const dt=joyLast?Math.min(.04,(t-joyLast)/1000):0;joyLast=t;const mag=Math.hypot(jx,jy);if(mag>.09){const speed=35+650*Math.pow((mag-.09)/.91,1.7),v=activeView(),p=places[mode];p.x=clamp(p.x+jx/mag*speed*dt/Math.max(1,v.clientWidth-13),0,1);p.y=clamp(p.y+jy/mag*speed*dt/Math.max(1,v.clientHeight-19),0,1);paintPointer()}joyFrame=requestAnimationFrame(joyTick)}
+analog.addEventListener('pointerdown',e=>{if(joyId!==null)return;e.preventDefault();joyId=e.pointerId;analog.setPointerCapture(e.pointerId);joyLast=0;joyVector(e);joyFrame=requestAnimationFrame(joyTick)});
+analog.addEventListener('pointermove',e=>{if(e.pointerId===joyId)joyVector(e)});
+function endJoy(e){if(e.pointerId!==joyId)return;joyId=null;cancelAnimationFrame(joyFrame);stick.style.transform='translate(-50%,-50%)'}
+['pointerup','pointercancel','lostpointercapture'].forEach(n=>analog.addEventListener(n,endJoy));
+function caretHit(x,y){if(document.caretPositionFromPoint){const p=document.caretPositionFromPoint(x,y);if(p)return [p.offsetNode,p.offset]}if(document.caretRangeFromPoint){const p=document.caretRangeFromPoint(x,y);if(p)return [p.startContainer,p.startOffset]}return null}
+function textIndex(hit,key){if(!hit)return null;const [node,n]=hit;const el=node.nodeType===3?node.parentElement:node;if(!el||!el.dataset||el.dataset[key]===undefined)return null;return Number(el.dataset[key])+(node.nodeType===3?n:0)}
+function mouseClick(){if(menuOpen){closeMenu();return}const {x,y}=pointerXY(),hit=caretHit(x,y);
+ if(mode==='edit'){let next=textIndex(hit,'offset');if(next===null){const rows=[...code.querySelectorAll('.line')];const row=rows.find(r=>{const b=r.getBoundingClientRect();return y>=b.top&&y<b.bottom});if(row){const a=Number(row.dataset.start),len=Number(row.dataset.length);const num=row.querySelector('.num').getBoundingClientRect();next=x<=num.right+4?a:a+len}else next=script.length}pos=clamp(next,0,script.length);renderEditor(false);syncClicks()}
+ else if(!busy||waiting){const next=textIndex(hit,'command');if(next!==null){cp=clamp(next,0,command.length);renderConsole(false)}}
+}
+$('leftClick').onclick=mouseClick;
+$('rightClick').onclick=()=>{if(menuOpen)closeMenu();else openMenu()};
+let wheelId=null,lastY=0,wheelPos=0,scrollTarget=null,scrollFrame=0,scrollView=null;
+function animateScroll(){if(!scrollView||scrollTarget===null){scrollFrame=0;return}const delta=scrollTarget-scrollView.scrollTop;if(Math.abs(delta)<.55){scrollView.scrollTop=scrollTarget;scrollFrame=0;scrollTarget=null;return}scrollView.scrollTop+=Math.sign(delta)*Math.max(1,Math.abs(delta)*.34);scrollFrame=requestAnimationFrame(animateScroll)}
+function scrollByWheel(d){const v=activeView();if(scrollView!==v){cancelAnimationFrame(scrollFrame);scrollFrame=0;scrollTarget=null;scrollView=v}scrollTarget=clamp((scrollTarget===null?v.scrollTop:scrollTarget)+d,0,Math.max(0,v.scrollHeight-v.clientHeight));wheelPos=(wheelPos+d*.65)%8;tread.style.backgroundPosition='0 '+wheelPos+'px';if(!scrollFrame)scrollFrame=requestAnimationFrame(animateScroll)}
+wheel.addEventListener('pointerdown',e=>{if(wheelId!==null)return;e.preventDefault();wheelId=e.pointerId;lastY=e.clientY;wheel.setPointerCapture(e.pointerId)});
+wheel.addEventListener('pointermove',e=>{if(e.pointerId!==wheelId)return;scrollByWheel((e.clientY-lastY)*1.15);lastY=e.clientY});
+['pointerup','pointercancel','lostpointercapture'].forEach(n=>wheel.addEventListener(n,e=>{if(e.pointerId===wheelId)wheelId=null}));
+wheel.addEventListener('wheel',e=>{e.preventDefault();scrollByWheel(e.deltaY*(e.deltaMode===1?12:e.deltaMode===2?activeView().clientHeight:1))},{passive:false});
+const menu=$('flowerMenu'), flower=$('flower'), shade=$('menuShade');let menuOpen=false;
+function layoutMenu(){const bounds=deck.getBoundingClientRect(),base=flower.getBoundingClientRect(),mb=menu.getBoundingClientRect();const cx=base.left+base.width/2,cy=base.top+base.height/2;const buttons=[...menu.querySelectorAll('button')].filter(b=>!b.hidden);const buttonSize=buttons[0]?.offsetWidth||42;const radius=Math.min(132,Math.max(78,buttonSize*2.35));const step=buttons.length===1?0:Math.min(Math.PI*.82/(buttons.length-1),.65);const start=-Math.PI/2;
+ buttons.forEach((b,i)=>{const a=start+step*i;const x=clamp(cx+radius*Math.cos(a),bounds.left+buttonSize/2+5,bounds.right-buttonSize/2-5);const y=clamp(cy+radius*Math.sin(a),bounds.top+buttonSize/2+5,bounds.bottom-buttonSize/2-5);b.style.left=(x-mb.left)+'px';b.style.top=(y-mb.top)+'px'})}
+function openMenu(){syncClicks();for(const id of ['open','new','undo'])$(id).hidden=mode==='run';menuOpen=true;menu.inert=false;shade.hidden=false;$('side').classList.add('menu-open');flower.setAttribute('aria-expanded','true');layoutMenu();menu.classList.add('open')}
+function closeMenu(){menuOpen=false;menu.classList.remove('open');menu.inert=true;shade.hidden=true;$('side').classList.remove('menu-open');flower.setAttribute('aria-expanded','false')}
+flower.onclick=()=>menuOpen?closeMenu():openMenu();shade.onclick=closeMenu;menu.addEventListener('click',e=>{if(e.target.closest('button'))closeMenu()});
+window.addEventListener('resize',()=>{paintPointer();if(menuOpen)layoutMenu()});
+if(typeof ResizeObserver==='function')new ResizeObserver(paintPointer).observe(deck);
+keyboard();renderEditor();renderConsole();syncClicks();paintPointer();
 // GitHub Pages has no custom headers. Restrict isolation to this beta directory.
 if(!crossOriginIsolated&&'serviceWorker'in navigator&&window.isSecureContext&&window.top===window.self){
  navigator.serviceWorker.register('./isolation.js',{scope:'./'}).then(()=>navigator.serviceWorker.ready).then(()=>{
