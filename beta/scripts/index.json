@@ -1,0 +1,32 @@
+[
+  {
+    "file": "recursion.py",
+    "title": "Recursión",
+    "category": "Fundamentos"
+  },
+  {
+    "file": "binary_search.py",
+    "title": "Búsqueda binaria",
+    "category": "Búsqueda"
+  },
+  {
+    "file": "quicksort.py",
+    "title": "Quicksort",
+    "category": "Ordenamiento"
+  },
+  {
+    "file": "mergesort.py",
+    "title": "Mergesort",
+    "category": "Ordenamiento"
+  },
+  {
+    "file": "bst.py",
+    "title": "Árbol binario de búsqueda",
+    "category": "Árboles"
+  },
+  {
+    "file": "bfs.py",
+    "title": "BFS",
+    "category": "Grafos"
+  }
+]

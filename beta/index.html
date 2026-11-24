@@ -82,6 +82,23 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 #speedLevels button.on{background:#a2edb1}
 #flower{font-variant-emoji:text}
 @media(orientation:portrait){.deck{grid-template-columns:48px minmax(0,1fr) 64px}.side{justify-content:space-between;gap:6px}.direction-wrap .dpad{width:100%}}
+
+/* beta 0.4 */
+.deck[data-view=swap] .editor{grid-row:1}
+.deck[data-view=swap] .console{grid-row:2}
+.deck[data-view=focus]{grid-template-rows:auto 0 minmax(0,1fr);row-gap:clamp(4px,1.2dvh,8px)}
+.deck[data-view=focus] .screen.active{grid-row:1/3;height:calc(6 * var(--lh) + 6px)}
+.deck[data-view=focus] .screen:not(.active){display:none}
+.pop-panel{width:min(340px,78%);max-height:calc(100% - 16px);display:flex;flex-direction:column;overflow:hidden}
+.pop-panel[hidden]{display:none}
+#viewLevels{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+#viewLevels button{height:clamp(32px,13dvh,50px);font-size:11px;white-space:pre-line}
+#viewLevels button.on{background:#a2edb1}
+#libraryList{display:flex;flex-direction:column;gap:5px;overflow:auto;min-height:0;overscroll-behavior:contain;touch-action:pan-y}
+#libraryList button{flex:none;min-height:30px;display:flex;align-items:center;justify-content:space-between;text-align:left;padding:6px 9px;font:600 12px/1.2 ui-monospace,monospace}
+#libraryList button small{font-size:10px;color:#48617b}
+#libraryList button.restore{background:#b9e8cc}
+#libraryList .lib-status{padding:6px;color:#b9cde0}
 </style>
 </head>
 <body>
@@ -99,6 +116,8 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <button id="select" title="Seleccionar / interrumpir" aria-label="Seleccionar">SEL</button>
 <button id="copy" title="Copiar / pegar" aria-label="Copiar o pegar">PST</button>
 <button id="speed" title="Sensibilidad de scroll" aria-label="Sensibilidad de scroll">SPD</button>
+<button id="view" title="Visualización" aria-label="Visualización">VIEW</button>
+<button id="library" title="Biblioteca de scripts" aria-label="Biblioteca de scripts">LIB</button>
 </div>
 <input type="file" id="file" accept=".py,.txt,text/plain" hidden>
 </aside>
@@ -112,6 +131,8 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <button class="menu-shade" id="menuShade" aria-label="Cerrar menú" hidden></button>
 <div class="mini-toast" id="miniToast" role="status" hidden></div>
 <div class="speed-panel" id="speedPanel" role="group" aria-label="Sensibilidad de scroll" hidden><div class="speed-head"><span>Scroll</span><button id="speedClose" aria-label="Cerrar sensibilidad">×</button></div><div id="speedLevels"></div></div>
+<div class="speed-panel pop-panel" id="viewPanel" role="group" aria-label="Visualización" hidden><div class="speed-head"><span>VIEW</span><button id="viewClose" aria-label="Cerrar">×</button></div><div id="viewLevels"></div></div>
+<div class="speed-panel pop-panel" id="libraryPanel" role="group" aria-label="Biblioteca" hidden><div class="speed-head"><span>LIB</span><button id="libraryClose" aria-label="Cerrar">×</button></div><div id="libraryList"></div></div>
 </main>
 <script>
 'use strict';
@@ -121,7 +142,11 @@ let script='n = 5\nfor i in range(n):\n    print(i)', pos=0, anchor=null, undo=[
 let runtimeMeta=null, runningFilename=null;
 let filename='programa.py', transcript='', command='', cp=0, history=[], hi=0, worker=null, busy=false, waiting=false, loaded=false, channel=null, generation=0, pending=null;
 try{const saved=JSON.parse(localStorage.getItem('duopy.beta.v1'));if(saved&&typeof saved.text==='string'){script=saved.text;filename=saved.name||filename;pos=Math.min(saved.pos||0,script.length)}}catch{}
-function persist(){try{localStorage.setItem('duopy.beta.v1',JSON.stringify({text:script,name:filename,pos}))}catch{}}
+let librarySource=null,draftBackup=null;
+try{const s=JSON.parse(sessionStorage.getItem('duopy.library.scratch'));if(s&&typeof s.text==='string'&&s.source&&s.draft){draftBackup=s.draft;librarySource=s.source;script=s.text;filename=s.name;pos=Math.max(0,Math.min(s.pos||0,script.length))}}catch{}
+function persist(){try{const state={text:script,name:filename,pos};if(librarySource){sessionStorage.setItem('duopy.library.scratch',JSON.stringify({...state,source:librarySource,draft:draftBackup}))}else{localStorage.setItem('duopy.beta.v1',JSON.stringify(state));sessionStorage.removeItem('duopy.library.scratch')}}catch{}}
+function detachScratch(){if(!librarySource)return;const draft=draftBackup;librarySource=null;draftBackup=null;if(draft){script=draft.text;filename=draft.name;pos=draft.pos}anchor=null;undo=[];persist()}
+
 function span(text,cls){const el=document.createElement('span');el.textContent=text;if(cls)el.className=cls;return el}
 const tokens=/(#[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b(?:def|class|return|if|elif|else|for|while|in|not|and|or|is|import|from|as|pass|break|continue|try|except|finally|raise|with|lambda|assert|True|False|None|yield|del|global|nonlocal)\b|\b\d+(?:\.\d+)?\b)/g;
 function tokenClass(s){return s[0]==='#'?'comment':s[0]==='"'||s[0]==="'"?'string':/^\d/.test(s)?'number':'keyword'}
@@ -185,8 +210,8 @@ $('keyboard').addEventListener('click',e=>{const b=e.target.closest('button[data
 // Each press moves exactly once; no hold-to-repeat.
 document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>move(b.dataset.move));$('select').onclick=selection;$('copy').onclick=copyPaste;
 $('undo').onclick=()=>{if(mode==='edit'&&undo.length){[script,pos]=undo.pop();anchor=null;renderEditor();syncClicks()}};
-$('new').onclick=()=>{if(mode==='edit'&&(!script||confirm('¿Nuevo script?'))){snapshot();script='';pos=0;anchor=null;filename='programa.py';renderEditor();syncClicks()}};
-$('open').onclick=()=>$('file').click();$('file').onchange=async()=>{const f=$('file').files[0];if(f&&mode==='edit'){try{const s=await f.text();if(mode!=='edit')return;snapshot();script=s;filename=f.name;pos=0;anchor=null;renderEditor();syncClicks()}catch(e){append(String(e)+'\n')}}$('file').value=''};
+$('new').onclick=()=>{if(mode==='edit'&&(!script||confirm('¿Nuevo script?'))){detachScratch();snapshot();script='';pos=0;anchor=null;filename='programa.py';renderEditor();syncClicks()}};
+$('open').onclick=()=>$('file').click();$('file').onchange=async()=>{const f=$('file').files[0];if(f&&mode==='edit'){try{const s=await f.text();if(mode!=='edit')return;detachScratch();snapshot();script=s;filename=f.name;pos=0;anchor=null;renderEditor();syncClicks()}catch(e){append(String(e)+'\n')}}$('file').value=''};
 $('save').onclick=()=>{const a=document.createElement('a'),url=URL.createObjectURL(new Blob([script],{type:'text/x-python'}));a.href=url;a.download=filename.endsWith('.py')?filename:filename+'.py';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 function startWorker(){if(worker)return;const id=++generation;loaded=false;runtimeMeta=null;channel=typeof SharedArrayBuffer==='function'&&crossOriginIsolated?new SharedArrayBuffer(65544):null;
  worker=new Worker('./python-worker.js');worker.onmessage=e=>{if(id!==generation)return;const m=e.data;
@@ -201,8 +226,8 @@ function startWorker(){if(worker)return;const id=++generation;loaded=false;runti
 function execute(kind,text){if(busy)return;busy=true;waiting=false;command='';cp=0;renderConsole();try{startWorker();if(kind==='script')runningFilename=filename;const p={type:kind,code:text,filename:runningFilename||filename};if(loaded)worker.postMessage(p);else{pending=p;append('… Python\n')}}catch(e){append(String(e)+'\n');stop(false)}}
 function stop(note){if(worker){worker.terminate();worker=null;generation++}if(note&&busy)append('\nKeyboardInterrupt\n');busy=false;waiting=false;loaded=false;runtimeMeta=null;pending=null;channel=null;command='';cp=0;renderConsole();syncClicks()}
 function toggle(){if(mode==='edit'){mode='run';anchor=null;transcript='';deck.dataset.mode=mode;execute('script',script)}else{if(busy)stop(true);mode='edit';deck.dataset.mode=mode} $('switch').setAttribute('aria-checked',String(mode==='run'));$('consoleScreen').classList.toggle('active',mode==='run');$('editorScreen').classList.toggle('active',mode==='edit');renderEditor();renderConsole();syncClicks()}
-$('switch').onclick=()=>{closeMenu();closeSpeed();cancelPad();hideToast();toggle()};
-document.addEventListener('keydown',e=>{if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='Escape'&&menuOpen){e.preventDefault();closeMenu();return}if(e.key==='F5'){e.preventDefault();$('switch').click();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
+$('switch').onclick=()=>{closeMenu();closePanels();cancelPad();hideToast();toggle();if(deck.dataset.view==='focus')requestAnimationFrame(()=>{if(mode==='edit')renderEditor();else renderConsole()})};
+document.addEventListener('keydown',e=>{if(e.isComposing||e.target.tagName==='INPUT')return;if(e.key==='Escape'){if(menuOpen||!viewPanel.hidden||!libraryPanel.hidden||!speedPanel.hidden){e.preventDefault();closeMenu();closePanels();return}}if(e.key==='F5'){e.preventDefault();$('switch').click();return}if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'&&mode==='edit'){e.preventDefault();$('undo').click()}else if(e.key.toLowerCase()==='c'&&mode==='run'&&busy){e.preventDefault();stop(true)}return}
  if(e.key.startsWith('Arrow')){e.preventDefault();if(!e.repeat)move(e.key.slice(5).toLowerCase())}else if(e.key==='Enter'){e.preventDefault();enter()}else if(e.key==='Backspace'){e.preventDefault();backspace()}else if(e.key==='Tab'&&e.target.tagName!=='BUTTON'){e.preventDefault();insert('    ')}else if(e.key.length===1&&!e.altKey){e.preventDefault();insert(e.key)}});
 document.addEventListener('paste',e=>{if(e.target.tagName==='INPUT')return;const s=e.clipboardData?.getData('text/plain');if(s!==undefined){e.preventDefault();insert(s)}});
 
@@ -210,7 +235,7 @@ document.addEventListener('paste',e=>{if(e.target.tagName==='INPUT')return;const
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 function activeView(){return mode==='edit'?ev:cv}
 const pad=$('touchpad'),levels=[.4,.7,1,1.4,2,3];
-let sensitivity=1;try{const n=Number(localStorage.getItem('duopy.scroll.sensitivity'));if(levels.includes(n))sensitivity=n}catch{}
+let sensitivity=.4;try{const n=Number(localStorage.getItem('duopy.scroll.sensitivity'));if(levels.includes(n))sensitivity=n}catch{}
 let padId=null,padView=null,lastX=0,lastY=0,targetX=0,targetY=0;
 function cancelPad(){const id=padId;padId=null;padView=null;pad.classList.remove('dragging');if(id!==null&&pad.hasPointerCapture(id))pad.releasePointerCapture(id)}
 pad.addEventListener('pointerdown',e=>{if(padId!==null||e.button!==0)return;e.preventDefault();padId=e.pointerId;padView=activeView();lastX=e.clientX;lastY=e.clientY;targetX=padView.scrollLeft;targetY=padView.scrollTop;pad.setPointerCapture(padId);pad.classList.add('dragging')});
@@ -225,17 +250,32 @@ function hideToast(){clearTimeout(toastTimer);toast.hidden=true;toastKind=null}
 function showToast(message,button,duration=3000,kind=null){clearTimeout(toastTimer);toast.textContent=message;toastKind=kind;toast.hidden=false;const d=deck.getBoundingClientRect(),r=button.getBoundingClientRect();toast.style.left=clamp(r.right-d.left-deck.clientLeft-toast.offsetWidth,6,deck.clientWidth-toast.offsetWidth-6)+'px';toast.style.top=clamp(r.bottom-d.top-deck.clientTop+5,6,deck.clientHeight-toast.offsetHeight-6)+'px';toastTimer=setTimeout(hideToast,duration)}
 function runtimeInfo(){const m=runtimeMeta;return 'Python · navegador (Pyodide)\n'+(m?'Python '+m.version+' · '+m.cwd+(busy?' (último estado)':''):'Intérprete '+(busy?'cargando…':'sin iniciar'))+'\n'+(runningFilename?'Script: '+runningFilename+'\n':'')+(m?'Módulos base (ej.): '+m.modules.join(', '):'Módulos base: math, random, collections…')+(m&&m.packages.length?'\nPaquetes cargados: '+m.packages.join(', '):'')+'\nOtros paquetes compatibles: bajo demanda'}
 $('consoleInfo').onclick=()=>showToast(runtimeInfo(),$('consoleInfo'),4200,'runtime');
-$('editorInfo').onclick=()=>showToast(filename,$('editorInfo'),2300,'file');
+$('editorInfo').onclick=()=>showToast(filename+(librarySource?'\nCopia temporal · LIB':''),$('editorInfo'),2300,'file');
 const speedPanel=$('speedPanel');
 function closeSpeed(){speedPanel.hidden=true}
-function openSpeed(){hideToast();const box=$('speedLevels');box.replaceChildren(...levels.map(n=>{const b=document.createElement('button');b.textContent=n+'×';b.classList.toggle('on',n===sensitivity);b.setAttribute('aria-pressed',String(n===sensitivity));b.onclick=()=>{sensitivity=n;try{localStorage.setItem('duopy.scroll.sensitivity',String(n))}catch{}closeSpeed();showToast('Scroll '+n+'×',$('flower'),1800)};return b}));speedPanel.hidden=false}
+function openSpeed(){closePanels();hideToast();const box=$('speedLevels');box.replaceChildren(...levels.map(n=>{const b=document.createElement('button');b.textContent=n+'×';b.classList.toggle('on',n===sensitivity);b.setAttribute('aria-pressed',String(n===sensitivity));b.onclick=()=>{sensitivity=n;try{localStorage.setItem('duopy.scroll.sensitivity',String(n))}catch{}closeSpeed();showToast('Scroll '+n+'×',$('flower'),1800)};return b}));speedPanel.hidden=false}
 $('speedClose').onclick=closeSpeed;
 $('speed').onclick=openSpeed;
+const viewPanel=$('viewPanel'),libraryPanel=$('libraryPanel'),libList=$('libraryList');
+let libRequest=0,libraryManifest=null;
+function closePanels(){closeSpeed();viewPanel.hidden=true;libraryPanel.hidden=true;libRequest++}
+let layout='split';try{const v=localStorage.getItem('duopy.layout');if(['split','swap','focus'].includes(v))layout=v}catch{}
+deck.dataset.view=layout;
+function chooseView(v){layout=v;deck.dataset.view=v;try{localStorage.setItem('duopy.layout',v)}catch{}closePanels();requestAnimationFrame(()=>{if(mode==='edit')renderEditor();else renderConsole()})}
+function openView(){closePanels();hideToast();const box=$('viewLevels');box.replaceChildren(...[['split','▤\nDuo'],['swap','⇅\nSwap'],['focus','▣\nFocus']].map(([v,label])=>{const b=document.createElement('button');b.textContent=label;b.classList.toggle('on',v===layout);b.setAttribute('aria-pressed',String(v===layout));b.onclick=()=>chooseView(v);return b}));viewPanel.hidden=false}
+$('view').onclick=openView;$('viewClose').onclick=closePanels;
+$('libraryClose').onclick=closePanels;
+function status(s){const el=document.createElement('div');el.className='lib-status';el.textContent=s;return el}
+function restoreDraft(){if(mode!=='edit'||!librarySource)return;if(!confirm('¿Cerrar la copia temporal y volver a tu script?'))return;detachScratch();closePanels();renderEditor();syncClicks();showToast(filename,$('flower'),1800)}
+async function loadLibrary(item){if(mode!=='edit')return;if(librarySource&&!confirm('¿Reemplazar la copia temporal actual?'))return;const request=++libRequest;libList.replaceChildren(status('…'));try{const r=await fetch('./scripts/'+encodeURIComponent(item.file),{cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);const text=await r.text();if(request!==libRequest||mode!=='edit')return;if(!librarySource){draftBackup={text:script,name:filename,pos};persist()}librarySource=item.file;filename=item.file;script=text;pos=0;anchor=null;undo=[];persist();closePanels();renderEditor();syncClicks();showToast(filename+' · copia',$('flower'),1800)}catch(e){if(request===libRequest)libList.replaceChildren(status(String(e)),...libraryButtons(libraryManifest||[]))}}
+function libraryButtons(items){const nodes=[];if(librarySource){const back=document.createElement('button');back.className='restore';back.textContent='↶ Mi script';back.onclick=restoreDraft;nodes.push(back)}for(const item of items){const b=document.createElement('button'),name=document.createElement('span'),cat=document.createElement('small');name.textContent=item.title;cat.textContent=item.category||'';b.append(name,cat);b.onclick=()=>loadLibrary(item);nodes.push(b)}return nodes}
+async function openLibrary(){if(mode!=='edit'){showToast('LIB · EDIT',$('flower'),1800);return}closePanels();hideToast();libraryPanel.hidden=false;const request=++libRequest;libList.replaceChildren(status('…'));try{const r=await fetch('./scripts/index.json',{cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);const manifest=await r.json();if(request!==libRequest)return;if(!Array.isArray(manifest))throw Error('Biblioteca inválida');libraryManifest=manifest.filter(s=>s&&typeof s.title==='string'&&typeof s.file==='string'&&/^[a-zA-Z0-9_-]+\.py$/.test(s.file));const nodes=libraryButtons(libraryManifest);libList.replaceChildren(...(nodes.length?nodes:[status('Vacío')]))}catch(e){if(request===libRequest)libList.replaceChildren(status('LIB · '+e.message),...libraryButtons([]))}}
+$('library').onclick=openLibrary;
 const menu=$('flowerMenu'), flower=$('flower'), shade=$('menuShade');let menuOpen=false;
 function layoutMenu(){const bounds=deck.getBoundingClientRect(),base=flower.getBoundingClientRect(),mb=menu.getBoundingClientRect();const cx=base.left+base.width/2,cy=base.top+base.height/2;const buttons=[...menu.querySelectorAll('button')].filter(b=>!b.hidden);const size=buttons[0]?.offsetWidth||42;
- const rings=buttons.length>4?[buttons.slice(0,4),buttons.slice(4)]:[buttons];
- rings.forEach((ring,i)=>{const radius=Math.min(cy-bounds.top-size/2-5,size*(rings.length===1?2.15:i===0?2.9:1.55));ring.forEach((b,j)=>{const angle=-Math.PI/2+(ring.length>1?j/(ring.length-1):.5)*Math.PI/2;const x=clamp(cx+radius*Math.cos(angle),bounds.left+size/2+5,bounds.right-size/2-5);const y=clamp(cy+radius*Math.sin(angle),bounds.top+size/2+5,bounds.bottom-size/2-5);b.style.left=(x-mb.left)+'px';b.style.top=(y-mb.top)+'px'})})}
-function openMenu(){closeSpeed();hideToast();syncClicks();for(const id of ['open','new','undo'])$(id).hidden=mode==='run';menuOpen=true;menu.inert=false;shade.hidden=false;$('side').classList.add('menu-open');flower.setAttribute('aria-expanded','true');layoutMenu();menu.classList.add('open')}
+ const outer=buttons.length>7?5:4;const rings=buttons.length>4?[buttons.slice(0,outer),buttons.slice(outer)]:[buttons];
+ rings.forEach((ring,i)=>{const radius=Math.min(cy-bounds.top-size/2-5,size*(rings.length===1?2.15:i===0?3.6:2.05));ring.forEach((b,j)=>{const angle=-Math.PI/2+(ring.length>1?j/(ring.length-1):.5)*Math.PI/2;const x=clamp(cx+radius*Math.cos(angle),bounds.left+size/2+5,bounds.right-size/2-5);const y=clamp(cy+radius*Math.sin(angle),bounds.top+size/2+5,bounds.bottom-size/2-5);b.style.left=(x-mb.left)+'px';b.style.top=(y-mb.top)+'px'})})}
+function openMenu(){closePanels();hideToast();syncClicks();for(const id of ['open','new','undo','library'])$(id).hidden=mode==='run';menuOpen=true;menu.inert=false;shade.hidden=false;$('side').classList.add('menu-open');flower.setAttribute('aria-expanded','true');layoutMenu();menu.classList.add('open')}
 function closeMenu(){menuOpen=false;menu.classList.remove('open');menu.inert=true;shade.hidden=true;$('side').classList.remove('menu-open');flower.setAttribute('aria-expanded','false')}
 flower.onclick=()=>menuOpen?closeMenu():openMenu();shade.onclick=closeMenu;menu.addEventListener('click',e=>{if(e.target.closest('button'))closeMenu()});
 window.addEventListener('resize',()=>{cancelPad();hideToast();if(menuOpen)layoutMenu()});

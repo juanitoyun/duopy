@@ -1,4 +1,4 @@
-# DuoPy β 0.3
+# DuoPy β 0.4
 
 Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.github.io/duopy/beta/ si GitHub Pages publica main desde la raíz.
 
@@ -18,3 +18,9 @@ Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.g
 4. Probar while True: pass y STOP; la interfaz debe seguir respondiendo.
 5. Editar, guardar, recargar, abrir .py y comprobar contenido.
 6. Verificar orientación horizontal y los tres renglones visibles en cada visor.
+
+## Biblioteca y visualización
+- VIEW: Duo (3+3 líneas), Swap (intercambia las pantallas), Focus (6 líneas en pantalla activa; teclado permanente). No cambia EDIT/RUN.
+- SPD: 0.4× por defecto, mantiene preferencias guardadas.
+- LIB (EDIT): lee beta/scripts/index.json y copia archivos .py al editor; no escribe en GitHub. El borrador personal permanece en localStorage; la copia temporal se conserva en sessionStorage hasta cerrar la pestaña. LIB → Mi script restaura el borrador. SAVE descarga la copia actual.
+- Para incorporar algoritmos: añadir un .py en beta/scripts/ y una entrada {"file":"nombre.py","title":"Título","category":"Tema"} al índice JSON.
