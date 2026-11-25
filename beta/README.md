@@ -1,4 +1,4 @@
-# DuoPy β 0.7
+# DuoPy β 0.8
 
 Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.github.io/duopy/beta/ si GitHub Pages publica main desde la raíz.
 
@@ -40,3 +40,6 @@ Carrusel de celdas de AED y slides propias en modo oscuro; las previsualizacione
 OPEN admite .ipynb, .qmd y .md. El lector QMD interpreta Markdown, encabezados y bloques {python}/{pyodide} como unidades; no es el compilador Quarto completo. El ejemplo beta/study/memoria.qmd puede renderizarse aparte con Quarto + Quarto Live usando build.sh (requiere Quarto instalado; no validado en esta revisión). En DuoPy el motor existente Pyodide ejecuta los bloques, sin JupyterLite. Graphviz WASM renderiza DOT y el visor acepta SVG como imágenes aisladas. El puente IPython/Graphviz es experimental y no implementa widgets ni todos los mecanismos de visualización de aed-utilities. No se ejecuta código automáticamente al navegar. Abrir contenido de confianza. Se mantiene GitHub Pages estático.
 
 Para compilar con el motor nativo de Quarto: instalar Quarto y Python con Jupyter, ejecutar bash beta/study/build.sh. El formato documentado es live-revealjs; el HTML generado es independiente del visor de DuoPy. El ejemplo DOT usa la extensión visual propia de DuoPy; la gráfica Matplotlib es el ejemplo portable. No se necesita servidor Jupyter en ejecución.
+
+## STUDY 0.8
+Una única barra lateral con AED, opciones, touchpad y retorno a LAB. Run está en cada celda; STOP aparece en el encabezado solo mientras se ejecuta. El menú ⋯ agrupa OPEN, LINKED/SOLO, Slides/Lista, copiar, ejecutar todas, ejecutar hasta aquí y reset. Las flechas del pie y las tarjetas vecinas navegan. Código arriba, output debajo (incluye gráficas). Los mensajes de carga de paquetes Pyodide se separan del output de Python; el estado del encabezado indica carga. Matplotlib usa Agg en STUDY para evitar dependencias DOM y captura PNG al finalizar la celda; las excepciones reales siguen visibles. No se alteran los archivos AED ni la interfaz LAB.

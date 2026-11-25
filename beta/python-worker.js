@@ -1,8 +1,11 @@
 'use strict';
 const CDN='https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
 let py,ns,channel,ready,decoder=new TextDecoder(),count=0;
+const packageOptions={messageCallback:text=>send('progress',String(text)),errorCallback:text=>{send('progress',String(text));console.warn(text)}};
+let studyLoading=false;
 function send(type,text){postMessage({type,text})}
 function write(bytes){
+ if(studyLoading){return bytes.length}
  if(count<100000){const n=Math.min(bytes.length,100000-count);const s=decoder.decode(bytes.subarray(0,n),{stream:true});if(s)send('out',s);count+=n;if(count>=100000)send('out','\n[output limit]\n')}
  return bytes.length;
 }
@@ -22,9 +25,14 @@ onmessage=async e=>{const m=e.data;
  try{await ready;count=0;decoder=new TextDecoder();if(m.type==='script'||m.isolated)reset();
  // Standard library is bundled; supported external packages can be loaded on demand.
  let executable=m.code;
- if(m.type==='cell'){const lines=executable.split('\n');const kept=[];for(const line of lines){if(/^!pip install (?:--upgrade )?aed[-_]utilities\s*$/.test(line.trim())){await py.loadPackage('micropip');await py.runPythonAsync("import micropip\nawait micropip.install('aed-utilities')");send('out','aed-utilities instalado\n');continue}if(/^%matplotlib inline\s*$/.test(line.trim())){await py.loadPackage('matplotlib');await py.runPythonAsync("import matplotlib\nmatplotlib.use('Agg')");continue}if(/^%pylab inline\s*$/.test(line.trim())){await py.loadPackage(['numpy','matplotlib']);kept.push("import matplotlib\nmatplotlib.use('Agg')\nfrom numpy import *\nfrom matplotlib.pyplot import *\nimport numpy as np\nimport matplotlib.pyplot as plt");continue}kept.push(line)}executable=kept.join('\n')}
- await py.loadPackagesFromImports(executable);
+ if(m.type==='cell'){studyLoading=true;const lines=executable.split('\n');const kept=[];for(const line of lines){if(/^!pip install (?:--upgrade )?aed[-_]utilities\s*$/.test(line.trim())){await py.loadPackage('micropip',packageOptions);await py.runPythonAsync("import micropip\nawait micropip.install('aed-utilities')");send('out','aed-utilities instalado\n');continue}if(/^%matplotlib inline\s*$/.test(line.trim())){await py.loadPackage('matplotlib',packageOptions);await py.runPythonAsync("import matplotlib\nmatplotlib.use('Agg')");continue}if(/^%pylab inline\s*$/.test(line.trim())){await py.loadPackage(['numpy','matplotlib'],packageOptions);kept.push("import matplotlib\nmatplotlib.use('Agg')\nfrom numpy import *\nfrom matplotlib.pyplot import *\nimport numpy as np\nimport matplotlib.pyplot as plt");continue}kept.push(line)}executable=kept.join('\n')}
+ await py.loadPackagesFromImports(executable,m.type==='cell'?packageOptions:{});
+ studyLoading=false;
  if(m.type==='cell'){
+  // Use a headless backend before importing pyplot. The browser backend needs a DOM.
+  if('matplotlib' in py.loadedPackages||'matplotlib-pyodide' in py.loadedPackages){
+   py.runPython("import matplotlib as _duo_mpl\n_duo_mpl.use('Agg', force=True)\nimport matplotlib.pyplot as _duo_plt\n_duo_plt.show=lambda *a, **k: None");
+  }
   if(m.course&&!py.FS.analyzePath(py.FS.cwd()+'/cap1.txt').exists&&/\bcap1\.txt\b/.test(executable)){const r=await fetch('https://raw.githubusercontent.com/ivansipiran/AED-Apuntes/7d8ef60e45a1923f855b5777b60696b074a7a445/recursos/cap1.txt');if(r.ok){const bytes=new Uint8Array(await r.arrayBuffer());py.FS.writeFile('cap1.txt',bytes)}}
   // Capture IPython rich display and Graphviz source when the Python package is available.
   if(/aed_utilities|IPython|graphviz/.test(executable)){try{await py.loadPackage('micropip');await py.runPythonAsync("import micropip\nimport importlib.util\nif importlib.util.find_spec('IPython') is None:\n    await micropip.install('ipython')")}catch(e){send('out','[IPython opcional: '+String(e)+']\n')}}
@@ -36,5 +44,5 @@ onmessage=async e=>{const m=e.data;
  if(m.type==='cell'){for(const [key,type] of [['__eywa_svg','svg'],['__eywa_dot','dot']]){try{if(!ns.has(key))continue;const value=ns.get(key);if(typeof value==='string'&&value.length<4000000)postMessage({type,data:value});else if(value&&typeof value.destroy==='function')value.destroy();ns.delete(key)}catch{}}}
 
  if(m.type==='cell'){try{const figs=JSON.parse(py.runPython("import sys as _s, json as _j, io as _io, base64 as _b\n_duo_imgs=[]\nif 'matplotlib.pyplot' in _s.modules:\n    _p=_s.modules['matplotlib.pyplot']\n    for _n in _p.get_fignums()[:8]:\n        _buf=_io.BytesIO()\n        _p.figure(_n).savefig(_buf,format='png',dpi=110,bbox_inches='tight')\n        _duo_imgs.append(_b.b64encode(_buf.getvalue()).decode('ascii'))\n    _p.close('all')\n_j.dumps(_duo_imgs)"));for(const data of figs){if(data.length<8000000)postMessage({type:'image',data})}}catch(e){send('out','[Gráfico no disponible: '+String(e)+']\n')}}
- }catch(err){ok=false;send('out',String(err)+'\n')}finally{const rest=decoder.decode();if(rest)send('out',rest);reportMeta();postMessage({type:'done',ok})}
+ }catch(err){studyLoading=false;ok=false;send('out',String(err)+'\n')}finally{studyLoading=false;const rest=decoder.decode();if(rest)send('out',rest);reportMeta();postMessage({type:'done',ok})}
 };

@@ -27,7 +27,7 @@
 .study-carousel[data-view=slides] .nb-gutter button{width:29px;height:23px}
 .study-carousel .nb-content{min-width:0}
 .study-carousel[data-view=slides] .nb-cell[data-kind=code] .nb-content{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;align-items:start}
-.study-carousel[data-view=slides] .nb-cell[data-kind=code] .nb-content:has(.nb-output:not([hidden])){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+
 .study-code{min-width:0;background:#141625;border:1px solid #373b52;border-radius:6px;padding:5px}
 .study-carousel .nb-content pre{font:clamp(10px,3.15dvh,15px)/1.45 ui-monospace,monospace;overflow:visible;white-space:pre;min-width:max-content}
 .study-code{overflow:auto}
@@ -46,3 +46,25 @@
 @keyframes study-right{from{opacity:.3;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){.slide-in-left,.slide-in-right{animation:none}}
 @media(orientation:portrait){.notebook-deck{grid-template-columns:42px minmax(0,1fr) 43px}.study-logo span,.nb-side button span{display:none}.study-carousel{grid-template-columns:minmax(0,1fr)}.study-preview{display:none!important}.study-carousel[data-view=slides] .nb-cell[data-kind=code] .nb-content:has(.nb-output:not([hidden])){grid-template-columns:minmax(0,1fr)}}
+
+/* 0.8: one side rail, inline Run, stacked output */
+.notebook-deck{grid-template-columns:clamp(55px,11vw,112px) minmax(0,1fr)}
+.nb-side #toConsole{flex:0 0 clamp(28px,10dvh,44px);font-size:clamp(16px,5dvh,24px)}
+.nb-side #nbOptions{font-size:clamp(20px,6dvh,28px);line-height:1}
+.study-carousel{grid-template-columns:minmax(0,13%) minmax(0,1fr) minmax(0,13%)}
+.study-carousel[data-view=list]{grid-template-columns:minmax(0,1fr)}
+.study-carousel .nb-cell[data-kind=code] .nb-content{display:flex;flex-direction:column;align-items:stretch;gap:6px}
+.study-carousel .study-code,.study-carousel .nb-output{width:100%;min-width:0;max-width:100%}
+.study-carousel .nb-output{flex:none;border-color:#394359;background:#151a29}
+.study-carousel .nb-output.error{color:#ffb6b6;border-color:#674654}
+.study-carousel .nb-output img{max-height:none;width:auto;max-width:100%;height:auto}
+.study-carousel[data-view=slides] .nb-gutter{justify-content:flex-start;gap:9px}
+.study-carousel[data-view=slides] .nb-gutter button{order:-1;background:#394d48;color:#b8f0cc;border-color:#527963}
+.study-footer #nbPrev,.study-footer #nbNext{font-size:18px;min-width:32px;padding:0 8px}
+.study-footer #nbJump{min-width:52px}
+.study-stop{flex:none;width:26px;height:21px;background:#4c3344;color:#ffc1c1;border:1px solid #86576b;box-shadow:none;font-size:11px}
+.study-stop[hidden]{display:none}
+.study-options{width:min(310px,80%);z-index:8}
+.study-option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;overflow:auto}
+.study-option-grid button{min-height:31px;font-size:12px;padding:5px}
+@media(orientation:portrait){.notebook-deck{grid-template-columns:44px minmax(0,1fr)}.study-carousel{grid-template-columns:minmax(0,1fr)}}
