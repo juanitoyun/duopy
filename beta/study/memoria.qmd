@@ -1,12 +1,11 @@
 ---
 title: "Memoria y visualización"
 format:
-  revealjs:
+  live-revealjs:
     theme: dark
     transition: slide
     slide-number: true
-filters:
-  - live
+engine: jupyter
 ---
 
 ## 🧠 Memoria
@@ -22,6 +21,7 @@ $$
 ```{pyodide}
 #| envir: global
 #| autorun: false
+#| edit: false
 x = 10
 def doble(n):
     return 2*n
@@ -32,6 +32,7 @@ def doble(n):
 ```{pyodide}
 #| envir: global
 #| autorun: false
+#| edit: false
 print(doble(x))
 ```
 
@@ -40,6 +41,22 @@ print(doble(x))
 ```{pyodide}
 #| envir: global
 #| autorun: false
+#| edit: false
 __eywa_dot = 'digraph { 8 -> 3; 8 -> 10; 3 -> 1; 3 -> 6 }'
 print("Árbol")
+```
+
+## 📈 Gráfico
+
+```{pyodide}
+#| envir: global
+#| autorun: false
+#| edit: false
+import numpy as np
+import matplotlib.pyplot as plt
+n = np.arange(1, 11)
+plt.plot(n, n**2, color="#a78bfa")
+plt.xlabel("n")
+plt.ylabel("n²")
+plt.show()
 ```
