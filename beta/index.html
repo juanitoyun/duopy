@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#202a3b">
-<title>DuoPy β</title>
+<title>DuoPy β 0.8.1</title>
 <style>
 :root{color-scheme:dark;font-family:system-ui,sans-serif;--bg:#182332;--body:#34475f;--edge:#101b2c;--key:#e2e9f2;--ink:#172438;--accent:#99caff;--run:#a2edb1;--lh:clamp(12px,3.8dvh,18px);--font:clamp(10px,3.05dvh,15px)}
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg)}
@@ -158,7 +158,7 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 #nbChoices .aed-resource{display:block;overflow-wrap:anywhere;color:#b7d5fa;padding:5px;border-bottom:1px solid #354c61;font-size:11px}
 #nbChoices .aed-note{color:#aec3d9;font-size:10px;padding:3px}
 </style>
-<link rel="stylesheet" href="./study.css">
+<link rel="stylesheet" href="./study-v081.css">
 </head>
 <body>
 <div id="duoStage" class="duo-stage" data-page="console">
@@ -171,11 +171,11 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <button id="toConsole" title="Volver a LAB" aria-label="Bajar a LAB">⌄</button>
 </aside>
 <div class="nb-center">
-<header class="nb-header"><span class="study-tag">STUDY</span><span id="nbName">AED</span><span id="nbPosition">—</span><span id="nbState" role="status" aria-live="polite">●</span><button id="nbStop" class="study-stop" title="Detener ejecución" aria-label="Detener ejecución" hidden>■</button></header>
+<header class="nb-header"><span class="study-tag" title="DuoPy 0.8.1">STUDY</span><span id="nbName">AED</span><span id="nbPosition">—</span><span id="nbState" role="status" aria-live="polite">●</span><button id="nbStop" class="study-stop" title="Detener ejecución" aria-label="Detener ejecución" hidden>■</button></header>
 <div class="study-carousel" id="studyCarousel" data-view="slides">
-<button id="prevPreview" class="study-preview" aria-label="Celda anterior"></button>
+<button id="prevPreview" class="study-preview" hidden aria-label="Celda anterior"></button>
 <div class="nb-scroll" id="nbScroll" tabindex="0" aria-label="Celdas"></div>
-<button id="nextPreview" class="study-preview" aria-label="Celda siguiente"></button>
+<button id="nextPreview" class="study-preview" hidden aria-label="Celda siguiente"></button>
 </div>
 <div class="study-footer"><button id="nbPrev" title="Celda anterior" aria-label="Celda anterior">‹</button><button id="nbJump" title="Ir a celda" aria-label="Ir a celda">—</button><div id="nbDots" aria-hidden="true"></div><button id="nbNext" title="Celda siguiente" aria-label="Celda siguiente">›</button></div>
 <form id="nbInput" hidden><input id="nbInputText" aria-label="Entrada Python" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="submit" aria-label="Enviar entrada">↵</button></form>
@@ -308,7 +308,7 @@ $('new').onclick=()=>{if(mode==='edit'&&(!script||confirm('¿Nuevo script?'))){d
 $('open').onclick=()=>$('file').click();$('file').onchange=async()=>{const f=$('file').files[0];if(f&&mode==='edit'){try{const s=await f.text();if(mode!=='edit')return;detachScratch();snapshot();script=s;filename=f.name;pos=0;anchor=null;renderEditor();syncClicks()}catch(e){append(String(e)+'\n')}}$('file').value=''};
 $('save').onclick=()=>{const a=document.createElement('a'),url=URL.createObjectURL(new Blob([script],{type:'text/x-python'}));a.href=url;a.download=filename.endsWith('.py')?filename:filename+'.py';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 function startWorker(){if(worker)return;const id=++generation;loaded=false;runtimeMeta=null;channel=typeof SharedArrayBuffer==='function'&&crossOriginIsolated?new SharedArrayBuffer(65544):null;
- worker=new Worker('./python-worker.js');worker.onmessage=e=>{if(id!==generation)return;const m=e.data;
+ worker=new Worker('./python-worker-v081.js');worker.onmessage=e=>{if(id!==generation)return;const m=e.data;
   if(m.type==='ready'){loaded=true;if(pending){const p=pending;pending=null;worker.postMessage(p)}}
   else if(m.type==='meta'){runtimeMeta=m.meta;if(!toast.hidden&&toastKind==='runtime')showToast(runtimeInfo(),$('consoleInfo'),4200,'runtime')}
   else if(m.type==='out')append(m.text);
@@ -385,8 +385,8 @@ if(!crossOriginIsolated&&'serviceWorker'in navigator&&window.isSecureContext&&wi
 <script defer src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
-<script defer src="./aed-source.js"></script>
-<script defer src="./study.js"></script>
-<script defer src="./notebook.js"></script>
+<script defer src="./aed-source-v081.js"></script>
+<script defer src="./study-v081.js"></script>
+<script defer src="./notebook-v081.js"></script>
 </body>
 </html>

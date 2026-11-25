@@ -1,4 +1,4 @@
-# DuoPy β 0.8
+# DuoPy β 0.8.1
 
 Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.github.io/duopy/beta/ si GitHub Pages publica main desde la raíz.
 
@@ -43,3 +43,6 @@ Para compilar con el motor nativo de Quarto: instalar Quarto y Python con Jupyte
 
 ## STUDY 0.8
 Una única barra lateral con AED, opciones, touchpad y retorno a LAB. Run está en cada celda; STOP aparece en el encabezado solo mientras se ejecuta. El menú ⋯ agrupa OPEN, LINKED/SOLO, Slides/Lista, copiar, ejecutar todas, ejecutar hasta aquí y reset. Las flechas del pie y las tarjetas vecinas navegan. Código arriba, output debajo (incluye gráficas). Los mensajes de carga de paquetes Pyodide se separan del output de Python; el estado del encabezado indica carga. Matplotlib usa Agg en STUDY para evitar dependencias DOM y captura PNG al finalizar la celda; las excepciones reales siguen visibles. No se alteran los archivos AED ni la interfaz LAB.
+
+## 0.8.1
+Assets versionados con nombres independientes para evitar mezclar HTML nuevo con JS/CSS cacheado de versiones anteriores. Service worker revalida navegación y scripts/estilos. setBusy tolera controles opcionales ausentes. Abrir /beta/?v=0.8.1 para evitar una navegación cacheada.
