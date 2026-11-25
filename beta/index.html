@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#202a3b">
-<title>DuoPy β 0.8.1</title>
+<title>DuoPy β 0.9</title>
 <style>
 :root{color-scheme:dark;font-family:system-ui,sans-serif;--bg:#182332;--body:#34475f;--edge:#101b2c;--key:#e2e9f2;--ink:#172438;--accent:#99caff;--run:#a2edb1;--lh:clamp(12px,3.8dvh,18px);--font:clamp(10px,3.05dvh,15px)}
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg)}
@@ -159,6 +159,7 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 #nbChoices .aed-note{color:#aec3d9;font-size:10px;padding:3px}
 </style>
 <link rel="stylesheet" href="./study-v082.css">
+<link rel="stylesheet" href="./cell-editor-v09.css">
 </head>
 <body>
 <div id="duoStage" class="duo-stage" data-page="console">
@@ -171,7 +172,7 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <button id="toConsole" title="Volver a LAB" aria-label="Bajar a LAB">⌄</button>
 </aside>
 <div class="nb-center">
-<header class="nb-header"><span class="study-tag" title="DuoPy 0.8.1">STUDY</span><span id="nbName">AED</span><span id="nbPosition">—</span><span id="nbState" role="status" aria-live="polite">●</span><button id="nbStop" class="study-stop" title="Detener ejecución" aria-label="Detener ejecución" hidden>■</button></header>
+<header class="nb-header"><button class="study-tag" id="nbEditMode" title="Activar edición de celdas" aria-pressed="false">STUDY</button><span id="nbName">AED</span><span id="nbPosition">—</span><span id="nbState" role="status" aria-live="polite">●</span><button id="nbStop" class="study-stop" title="Detener ejecución" aria-label="Detener ejecución" hidden>■</button></header>
 <div class="study-carousel" id="studyCarousel" data-view="slides">
 <button id="prevPreview" class="study-preview" hidden aria-label="Celda anterior"></button>
 <div class="nb-scroll" id="nbScroll" tabindex="0" aria-label="Celdas"></div>
@@ -227,6 +228,22 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <div class="speed-panel pop-panel" id="viewPanel" role="group" aria-label="Visualización" hidden><div class="speed-head"><span>VIEW</span><button id="viewClose" aria-label="Cerrar">×</button></div><div id="viewLevels"></div></div>
 <div class="speed-panel pop-panel" id="libraryPanel" role="group" aria-label="Biblioteca" hidden><div class="speed-head"><span>LIB</span><button id="libraryClose" aria-label="Cerrar">×</button></div><div id="libraryList"></div></div>
 </main>
+<section id="cellEditor" class="cell-editor" aria-label="Editor temporal de celda" aria-hidden="true" inert>
+<header class="ce-header"><span class="ce-badge">EDIT</span><span id="ceTitle">Celda</span><span id="cePosition" role="status">1:1</span></header>
+<section class="ce-screen" aria-label="Código">
+<div class="ce-gutter" id="ceGutter" aria-hidden="true"></div>
+<textarea id="ceText" aria-label="Contenido de la celda" inputmode="none" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off"></textarea>
+</section>
+<aside class="ce-side"><div id="cePad" class="touchpad" aria-label="Desplazar código"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg></div><button id="ceUndo" title="Deshacer" aria-label="Deshacer">↶</button><button id="ceNative" title="Alternar teclado del dispositivo" aria-label="Alternar teclado nativo" aria-pressed="false">⌨</button></aside>
+<section class="keys" id="ceKeyboard" aria-label="Teclado de celda"></section>
+<aside class="ce-controls">
+<button id="ceApply" class="ce-apply">✓ Aplicar</button>
+<button id="ceCancel" class="ce-cancel">✕ Cancelar</button>
+<div class="ce-mini"><button id="ceSelect" aria-label="Seleccionar texto" aria-pressed="false">SEL</button><button id="cePaste" aria-label="Copiar o pegar">PST</button></div>
+<div class="direction-wrap"><div class="dpad" aria-label="Mover cursor">
+<button class="north" data-cell-move="up" aria-label="Arriba">▴</button><button class="west" data-cell-move="left" aria-label="Izquierda">◂</button><span class="hub"></span><button class="east" data-cell-move="right" aria-label="Derecha">▸</button><button class="south" data-cell-move="down" aria-label="Abajo">▾</button></div></div>
+</aside>
+</section>
 </div>
 <script>
 'use strict';
@@ -387,6 +404,7 @@ if(!crossOriginIsolated&&'serviceWorker'in navigator&&window.isSecureContext&&wi
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="./aed-source-v081.js"></script>
 <script defer src="./study-v081.js"></script>
-<script defer src="./notebook-v081.js"></script>
+<script defer src="./cell-editor-v09.js"></script>
+<script defer src="./notebook-v09.js"></script>
 </body>
 </html>

@@ -46,3 +46,6 @@ Una única barra lateral con AED, opciones, touchpad y retorno a LAB. Run está 
 
 ## 0.8.1
 Assets versionados con nombres independientes para evitar mezclar HTML nuevo con JS/CSS cacheado de versiones anteriores. Service worker revalida navegación y scripts/estilos. setBusy tolera controles opcionales ausentes. Abrir /beta/?v=0.8.1 para evitar una navegación cacheada.
+
+## 0.9 · Edición temporal
+Pulsar STUDY en el encabezado alterna EDIT. En EDIT cada celda tiene ✎. Abre una escena independiente, con copia del teclado LAB, touchpad, cruceta, selección, deshacer y opción de teclado nativo. Sin consola, worker ni almacenamiento propios. Aplicar modifica solo el texto de la celda activa; el output previo se conserva y se marca desactualizado hasta ejecutar. Cancelar descarta el borrador. No se persiste el contenido editado: se conserva en el documento activo al navegar, pasar a LAB o resetear kernel; al abrir otro documento o refrescar se recupera el original. La edición estructural se reserva para una fase posterior. El editor usa textarea nativo con números de línea y no colorea sintaxis en tiempo real; al regresar el resaltado se conserva. LAB y el worker original son idénticos.
