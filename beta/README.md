@@ -1,4 +1,4 @@
-# DuoPy β 0.6
+# DuoPy β 0.7
 
 Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.github.io/duopy/beta/ si GitHub Pages publica main desde la raíz.
 
@@ -34,3 +34,7 @@ Consola Python horizontal, sin dependencias de build. Abrir https://juanitoyun.g
 
 ## AED oficial
 El catálogo completo de 314 archivos está en beta/notebooks/aed-index.json, fijado al commit 7d8ef60e45a1923f855b5777b60696b074a7a445 de https://github.com/ivansipiran/AED-Apuntes. Se accede directamente a los originales de GitHub: no hay copia redistribuida ni modificación del contenido. Los notebooks se verifican por tamaño y SHA-1 de blob cuando Web Crypto está disponible. En NB se incluyen 10 capítulos, 7 guías, índice, README, recursos y checkpoints. Los enlaces de recursos apuntan a la misma revisión. Markdown, fórmulas KaTeX, imágenes y GIF originales se visualizan en el visor con conexión; si no cargan las dependencias CDN se usa Markdown básico. Para ejecutar se mantienen las celdas originales; el worker adapta en memoria las directivas %matplotlib inline, %pylab inline y las instalaciones de aed-utilities, e intenta capturar gráficos matplotlib. No se garantiza compatibilidad con aed-utilities, IPython, widgets o todos los notebooks: abrir el original desde ↗ permite usar Jupyter/Colab. El repo upstream no declara licencia de redistribución. No se almacenan copias de sus archivos.
+
+## STUDY 0.7
+Carrusel de celdas de AED y slides propias en modo oscuro; las previsualizaciones laterales y el índice permiten navegación arbitraria. ▣/☰ alterna carrusel y lista. LINKED conserva un namespace por documento activo; SOLO reinicia el namespace de cada celda (los módulos del intérprete pueden persistir). ▶ … reinicia y ejecuta hasta la celda elegida; detiene en errores o espera input. Al cambiar de capítulo se reinicia el kernel. LAB y STUDY independientes. Los originales no se modifican.
+OPEN admite .ipynb, .qmd y .md. El lector QMD interpreta Markdown, encabezados y bloques {python}/{pyodide} como unidades; no es el compilador Quarto completo. El ejemplo beta/study/memoria.qmd puede renderizarse aparte con Quarto + Quarto Live usando build.sh (requiere Quarto instalado; no validado en esta revisión). En DuoPy el motor existente Pyodide ejecuta los bloques, sin JupyterLite. Graphviz WASM renderiza DOT y el visor acepta SVG como imágenes aisladas. El puente IPython/Graphviz es experimental y no implementa widgets ni todos los mecanismos de visualización de aed-utilities. No se ejecuta código automáticamente al navegar. Abrir contenido de confianza. Se mantiene GitHub Pages estático.

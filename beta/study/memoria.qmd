@@ -1,0 +1,45 @@
+---
+title: "Memoria y visualización"
+format:
+  revealjs:
+    theme: dark
+    transition: slide
+    slide-number: true
+filters:
+  - live
+---
+
+## 🧠 Memoria
+
+Las variables sobreviven entre bloques del mismo entorno.
+
+$$
+T(n) = 2T(n/2)+n
+$$
+
+## Definición
+
+```{pyodide}
+#| envir: global
+#| autorun: false
+x = 10
+def doble(n):
+    return 2*n
+```
+
+## Uso
+
+```{pyodide}
+#| envir: global
+#| autorun: false
+print(doble(x))
+```
+
+## 🌳 Graphviz
+
+```{pyodide}
+#| envir: global
+#| autorun: false
+__eywa_dot = 'digraph { 8 -> 3; 8 -> 10; 3 -> 1; 3 -> 6 }'
+print("Árbol")
+```

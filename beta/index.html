@@ -158,18 +158,27 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 #nbChoices .aed-resource{display:block;overflow-wrap:anywhere;color:#b7d5fa;padding:5px;border-bottom:1px solid #354c61;font-size:11px}
 #nbChoices .aed-note{color:#aec3d9;font-size:10px;padding:3px}
 </style>
+<link rel="stylesheet" href="./study.css">
 </head>
 <body>
 <div id="duoStage" class="duo-stage" data-page="console">
 <section class="notebook-deck" id="notebookDeck" aria-label="Notebooks" inert aria-hidden="true">
 <aside class="nb-side">
-<button id="nbOpen" title="Abrir notebook" aria-label="Abrir notebook">↥</button>
-<button id="nbLibrary" title="Biblioteca" aria-label="Biblioteca">▤</button>
+<div class="study-logo">◉ <span>DuoPy</span></div>
+<button id="nbLibrary" title="Biblioteca" aria-label="Biblioteca">▤ <span>AED</span></button>
+<button id="nbOpen" title="Abrir .ipynb o .qmd" aria-label="Abrir archivo">↥ <span>OPEN</span></button>
+<button id="nbMode" title="Memoria compartida o aislada" aria-label="Modo de memoria">LINKED</button>
+<button id="nbView" title="Cambiar vista" aria-label="Cambiar vista">▣</button>
 <div class="touchpad" id="nbPad" aria-label="Scroll del notebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg></div>
 </aside>
 <div class="nb-center">
-<header class="nb-header"><span class="nb-brand" aria-hidden="true">◉</span><span id="nbName">Notebook</span><span id="nbState" role="status">●</span></header>
+<header class="nb-header"><span class="study-tag">STUDY</span><span id="nbName">AED</span><span id="nbPosition">—</span><span id="nbState" role="status">●</span></header>
+<div class="study-carousel" id="studyCarousel" data-view="slides">
+<button id="prevPreview" class="study-preview" aria-label="Celda anterior"></button>
 <div class="nb-scroll" id="nbScroll" tabindex="0" aria-label="Celdas"></div>
+<button id="nextPreview" class="study-preview" aria-label="Celda siguiente"></button>
+</div>
+<div class="study-footer"><button id="nbJump" title="Ir a celda" aria-label="Ir a celda">—</button><div id="nbDots" aria-hidden="true"></div><button id="nbUntil" title="Reiniciar y ejecutar hasta la celda" aria-label="Ejecutar hasta la celda">▶ …</button></div>
 <form id="nbInput" hidden><input id="nbInputText" aria-label="Entrada Python" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="submit" aria-label="Enviar entrada">↵</button></form>
 </div>
 <aside class="nb-right">
@@ -182,9 +191,10 @@ pre{font:inherit;margin:0;padding:1px 5px;min-width:max-content;tab-size:4;white
 <button id="nbPrev" title="Celda anterior" aria-label="Celda anterior">▴</button>
 <button id="nbNext" title="Celda siguiente" aria-label="Celda siguiente">▾</button>
 </aside>
-<input id="nbFile" type="file" accept=".ipynb,application/json" hidden>
+<input id="nbFile" type="file" accept=".ipynb,.qmd,.md,application/json,text/plain" hidden>
 <div class="nb-picker" id="nbPicker" hidden><div class="speed-head"><span>NB</span><button id="nbPickerClose" aria-label="Cerrar">×</button></div><div id="nbChoices"></div></div>
 <div class="nb-toast" id="nbToast" role="status" hidden></div>
+<div class="nb-picker" id="nbJumpPanel" hidden><div class="speed-head"><span>CELDAS</span><button id="nbJumpClose" aria-label="Cerrar">×</button></div><div id="nbJumpList"></div></div>
 </section>
 <main class="deck" id="deck" data-mode="edit">
 <section class="screen console" id="consoleScreen" aria-label="Consola"><div class="glyph">&gt;_</div><div class="viewport" id="consoleView" tabindex="0"><pre id="output"></pre></div><button class="info-dot" id="consoleInfo" aria-label="Información de la consola" title="Información de la consola">i</button></section>
@@ -378,6 +388,7 @@ if(!crossOriginIsolated&&'serviceWorker'in navigator&&window.isSecureContext&&wi
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="./aed-source.js"></script>
+<script defer src="./study.js"></script>
 <script defer src="./notebook.js"></script>
 </body>
 </html>
