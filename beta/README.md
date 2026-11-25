@@ -49,3 +49,6 @@ Assets versionados con nombres independientes para evitar mezclar HTML nuevo con
 
 ## 0.9 · Edición temporal
 Pulsar STUDY en el encabezado alterna EDIT. En EDIT cada celda tiene ✎. Abre una escena independiente, con copia del teclado LAB, touchpad, cruceta, selección, deshacer y opción de teclado nativo. Sin consola, worker ni almacenamiento propios. Aplicar modifica solo el texto de la celda activa; el output previo se conserva y se marca desactualizado hasta ejecutar. Cancelar descarta el borrador. No se persiste el contenido editado: se conserva en el documento activo al navegar, pasar a LAB o resetear kernel; al abrir otro documento o refrescar se recupera el original. La edición estructural se reserva para una fase posterior. El editor usa textarea nativo con números de línea y no colorea sintaxis en tiempo real; al regresar el resaltado se conserva. LAB y el worker original son idénticos.
+
+## 0.9.1
+CELL EDITOR ya no contiene textarea, input editable ni teclado nativo. Replica el editor LAB de spans coloreados, cursor manual, selección SEL/CPY/PST, navegación de un paso y teclado de seis filas. Lee la preferencia de sensibilidad de LAB sin escribirla. Estado de edición independiente; no toca el script ni el intérprete LAB. Aplicar/Cancelar conservan la semántica 0.9.
